@@ -60,4 +60,9 @@ $route['skills'] = 'Skills';
 $route['customer/post-work'] = 'CustomerRegistration/post_work';
 $route['customer'] = 'CustomerRegistration/customer_dashboard';
 $route['Freelancer'] = 'FreelancerRegistration/freelancer_dashboard';
+$route['freelancer/manage_skills'] = 'FreelancerRegistration/update_skills';
+$route['freelancer/submit_bid'] = 'FreelancerRegistration/submit_bid';
+
+
+
 

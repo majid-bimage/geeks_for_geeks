@@ -29,7 +29,7 @@
 <br>
 
 <label for="remove_skill">Remove Skill:</label>
-<select name="remove_skill" required>
+<select name="remove_skill" >
     <?php foreach ($freelancer_skills as $freelancer_skill): ?>
         <option value="<?php echo $freelancer_skill->skill_id; ?>"><?php echo $freelancer_skill->skill_name; ?></option>
     <?php endforeach; ?>
@@ -39,7 +39,77 @@
 </form>
 </div>
 
+<div>
+    
+<h3>Matching Works:</h3>
+
+<ul>
+    <?php foreach ($matching_works as $work): ?>
+        <li>
+            <strong>Work Title:</strong> <?php echo $work->work_title; ?><br>
+            <strong>Description:</strong> <?php echo $work->description; ?><br>
+            <strong>Duration:</strong> <?php echo $work->duration; ?> days<br>
+            <strong>Budget:</strong> $<?php echo $work->budget; ?><br>
+
+            <!-- Check if a bid exists for this work -->
+            <?php $bid_exists = check_bid_existence($work->id, $matching_bids); ?>
+
+            <?php if ($bid_exists): ?>
+                <!-- Display "Bid Submitted" and "Edit Bid" button -->
+                <p>Bid Status: Bid Submitted</p>
+                <button onclick="editBid(<?php echo $work->id; ?>)">Edit Bid</button>
+            <?php else: ?>
+                <!-- Display "Post Bid" button -->
+                <button onclick="showBidForm(<?php echo $work->id; ?>)">Post Bid</button>
+            <?php endif; ?>
+
+            <!-- Bid form (hidden by default) -->
+            <div id="bidForm_<?php echo $work->id; ?>" style="display: none;">
+                <?php echo form_open('freelancer/submit_bid'); ?>
+                <input type="hidden" name="work_id" value="<?php echo $work->id; ?>">
+                <label for="bid_amount">Bid Amount ($):</label>
+                <input type="number" name="bid_amount" required><br>
+                <label for="proposal">Proposal:</label>
+                <textarea name="proposal" required></textarea><br>
+                <input type="submit" value="Submit Bid">
+                <?php echo form_close(); ?>
+            </div>
+        </li>
+    <?php endforeach; ?>
+</ul>
+
+
+
+</div>
+
 <a href="<?php echo base_url('logout'); ?>">Logout</a>
+
+<script>
+function showBidForm(workId) {
+    // Show the bid form for the specified work
+    var bidForm = document.getElementById('bidForm_' + workId);
+    if (bidForm.style.display === 'none') {
+        bidForm.style.display = 'block';
+    } else {
+        bidForm.style.display = 'none';
+    }
+}
+
+function editBid(workId) {
+    // Redirect to the "Edit Bid" page or show an edit bid form
+    // You can implement this based on your project's requirements
+}
+
+// Function to check if a bid exists for a work
+function check_bid_existence(workId, matchingBids) {
+    for (var i = 0; i < matchingBids.length; i++) {
+        if (matchingBids[i].work_id === workId) {
+            return true;
+        }
+    }
+    return false;
+}
+</script>
 
 </body>
 </html>
