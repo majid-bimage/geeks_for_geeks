@@ -46,7 +46,9 @@ class Login extends CI_Controller {
                 $data['skills'] = $this->Skill_model->get_skills();
                 // Redirect to the appropriate dashboard or profile page based on user role
                 if ($user->role === 'freelancer') {
-                    $this->load->view('freelancer_dashboard_view',$data); // Load freelancer dashboard
+                    // $this->load->view('freelancer_dashboard_view',$data); // Load freelancer dashboard
+                        redirect('Freelancer');
+
                 } elseif ($user->role === 'customer') {
                     // $this->load->view('customer_dashboard_view',$data); // Load customer dashboard
 

@@ -52,23 +52,44 @@
             <strong>Budget:</strong> $<?php echo $work->budget; ?><br>
 
             <!-- Check if a bid exists for this work -->
-            <?php $bid_exists = check_bid_existence($work->id, $matching_bids); ?>
+            <?php // $bid_exists = check_bid_existence($work->id, $matching_bids);
+                $bid_exists = in_array($work->id, $submitted_works);
+
+            ?>
 
             <?php if ($bid_exists): ?>
+                <?php
+                foreach ($submitted_bids as $row){
+                    if($row['work_id'] == $work->id){
+                        $w  = $row;
+                    }
+                }
+            ?>
                 <!-- Display "Bid Submitted" and "Edit Bid" button -->
                 <p>Bid Status: Bid Submitted</p>
-                <button onclick="editBid(<?php echo $work->id; ?>)">Edit Bid</button>
+                <button onclick="showBidForm(<?php echo $work->id; ?>)">Edit Bid</button>
             <?php else: ?>
+                <?php
+                
+                        $w  = array();
+                   
+            ?>
                 <!-- Display "Post Bid" button -->
                 <button onclick="showBidForm(<?php echo $work->id; ?>)">Post Bid</button>
             <?php endif; ?>
 
+            
             <!-- Bid form (hidden by default) -->
             <div id="bidForm_<?php echo $work->id; ?>" style="display: none;">
+            <?php if ($bid_exists): ?>
+                <?php echo form_open('freelancer/edit_bid'); ?>
+            <?php else: ?>
                 <?php echo form_open('freelancer/submit_bid'); ?>
+            <?php endif; ?>
+
                 <input type="hidden" name="work_id" value="<?php echo $work->id; ?>">
                 <label for="bid_amount">Bid Amount ($):</label>
-                <input type="number" name="bid_amount" required><br>
+                <input type="number" name="bid_amount" value="<?php if($w){ echo $w['bid_amount']; } ?>" required><br>
                 <label for="proposal">Proposal:</label>
                 <textarea name="proposal" required></textarea><br>
                 <input type="submit" value="Submit Bid">

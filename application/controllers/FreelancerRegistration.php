@@ -88,6 +88,17 @@ public function email_check($email)
         // Retrieve skills associated with the freelancer from the Freelancer_model
         $data['freelancer_skills'] = $this->Freelancer_model->get_freelancer_skills($this->session->userdata('user_id')); // Assuming you store freelancer's user_id in the session
 
+        $data['submitted_bids'] = $this->Bid_model->get_submitted_bids($this->session->userdata('user_id'));
+        
+
+        $str ="";
+
+        foreach ($data['submitted_bids'] as  $row){
+            $str = $str.",".$row['work_id'];
+        }
+        $data['submitted_works'] = explode(',',$str);
+
+       
         $this->load->view('freelancer_dashboard_view', $data);
 
     }

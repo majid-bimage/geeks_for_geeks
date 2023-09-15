@@ -25,4 +25,15 @@ class Bid_model extends CI_Model {
         $this->db->update('bids', $data);
     }
     
+
+    public function get_submitted_bids($freelancer_id){
+        $this->db->select('*');
+        $this->db->from('bids');
+        if($freelancer_id){
+            $this->db->where('freelancer_id', $freelancer_id);
+        }
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
 }
