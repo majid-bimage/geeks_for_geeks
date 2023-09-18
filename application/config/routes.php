@@ -62,6 +62,9 @@ $route['customer'] = 'CustomerRegistration/customer_dashboard';
 $route['Freelancer'] = 'FreelancerRegistration/freelancer_dashboard';
 $route['freelancer/manage_skills'] = 'FreelancerRegistration/update_skills';
 $route['freelancer/submit_bid'] = 'FreelancerRegistration/submit_bid';
+$route['view_bids/(:num)'] = 'CustomerRegistration/view_bids/$1';
+$route['accept_bid/(:num)'] = 'CustomerRegistration/accept_bid/$1';
+
 
 
 

@@ -15,5 +15,42 @@ class Work_model extends CI_Model {
             $this->db->insert('work_skills', array('work_id' => $work_id, 'skill_id' => $skill_id));
         }
     }
+    public function get_works_by_customer($customerid){
+
+        $this->db->select('w.*');
+        $this->db->from('works w');
+        $this->db->where('w.customer_id', $customerid);
+        $query = $this->db->get();
+
+        return $query->result();
+         if ($query->num_rows() > 0) {
+             return $query->result(); // Return an array of skill objects
+         } else {
+             return array(); // Return an empty array if no skills are found
+         }
+    }
     
+    public function get_skills_by_work($work_id){
+        $this->db->select('s.*');
+        $this->db->from('work_skills ws');
+        $this->db->join('skills s', 's.id = ws.skill_id', 'left');
+        $this->db->where('ws.work_id', $work_id);
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
+    public function get_work_details($work_id){
+        $this->db->select('w.*');
+        $this->db->from('works w');
+        $this->db->where('w.id', $work_id);
+        $query = $this->db->get();
+
+        return $query->result();
+         if ($query->num_rows() > 0) {
+             return $query->result(); // Return an array of skill objects
+         } else {
+             return array(); // Return an empty array if no skills are found
+         }
+    }
 }

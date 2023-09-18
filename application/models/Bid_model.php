@@ -36,4 +36,24 @@ class Bid_model extends CI_Model {
 
         return $query->result_array();
     }
+
+    public function get_bids_for_work($work_id) {
+        $this->db->select('*');
+        $this->db->from('bids');
+        $this->db->where('work_id', $work_id);
+        $query = $this->db->get();
+
+        return $query->result();
+    }
+
+    public function accept_bid($bid_id){
+        $data = array(
+            'status' => 1, // Set the status to "accepted" or any appropriate value
+        );
+    
+        $this->db->where('id', $bid_id);
+        $this->db->update('bids', $data);
+
+        return true;
+    }
 }

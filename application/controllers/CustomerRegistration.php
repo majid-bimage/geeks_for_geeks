@@ -7,8 +7,10 @@ class CustomerRegistration extends CI_Controller {
         parent::__construct();
         $this->load->model('Customer_model'); // Load the Customer model
         $this->load->model('Skill_model'); // Load the Skill_model
-        $this->load->model('Work_model'); // Load the Skill_model
+        $this->load->model('Work_model'); // Load the Work_model
+        $this->load->model('Bid_model'); // Load the Bid_model
 
+        
         
 
         
@@ -42,6 +44,15 @@ class CustomerRegistration extends CI_Controller {
 
     public function customer_dashboard(){
         $data['skills'] = $this->Skill_model->get_skills();
+        $data['posted_works'] = $this->Work_model->get_works_by_customer($this->session->userdata('user_id'));
+
+        foreach($data['posted_works'] as $work){
+            $data['work_skills'][$work->id] = $this->Work_model->get_skills_by_work($work->id);
+            // Get bids received for the work
+            $data['bids_received'][$work->id] = $this->Bid_model->get_bids_for_work($work->id);
+ 
+        }
+        
         $this->load->view('customer_dashboard_view',$data); // Load customer dashboard
     }
 
@@ -112,6 +123,23 @@ class CustomerRegistration extends CI_Controller {
             // Redirect to a success page or reload the form with a success message
             redirect('customer');
         }
+    }
+    public function view_bids($work_id){
+        // Get the work details based on the provided $work_id
+        $data['work_details'] = $this->Work_model->get_work_details($work_id); // Implement this method in your Work_model
+        $data['bids_received'] = $this->Bid_model->get_bids_for_work($work_id);
+        $this->load->view('header');
+        $this->load->view('view_bids_by_work',$data);
+
+    }
+
+    public function accept_bid($bid_id){
+        
+        // Update the bid status as accepted in your database
+        $this->Bid_model->accept_bid($bid_id);
+
+        // Redirect back to the work details page or any other relevant page
+        redirect('customer');
     }
         
 }
