@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 15, 2023 at 05:45 AM
+-- Generation Time: Sep 19, 2023 at 02:38 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -33,15 +33,16 @@ CREATE TABLE `bids` (
   `work_id` int(11) NOT NULL,
   `bid_amount` decimal(10,2) NOT NULL,
   `proposal` text NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` tinyint(4) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `bids`
 --
 
-INSERT INTO `bids` (`id`, `freelancer_id`, `work_id`, `bid_amount`, `proposal`, `created_at`) VALUES
-(1, 1, 2, '1.00', 'a', '2023-09-08 05:19:05');
+INSERT INTO `bids` (`id`, `freelancer_id`, `work_id`, `bid_amount`, `proposal`, `created_at`, `status`) VALUES
+(1, 1, 2, '1.00', 'a', '2023-09-08 05:19:05', 1);
 
 -- --------------------------------------------------------
 

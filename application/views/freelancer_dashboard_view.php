@@ -54,6 +54,7 @@
             <!-- Check if a bid exists for this work -->
             <?php // $bid_exists = check_bid_existence($work->id, $matching_bids);
                 $bid_exists = in_array($work->id, $submitted_works);
+                $accepted= false;
 
             ?>
 
@@ -62,18 +63,35 @@
                 foreach ($submitted_bids as $row){
                     if($row['work_id'] == $work->id){
                         $w  = $row;
+                        
+                    }
+                    switch($w['status']){
+                        case "1":
+                            echo "Bid Accepted";
+                            $accepted= true;
+                            break;
+
+                        case 2:
+                            echo "Bid Rejected";
+                            echo '<button onclick="showBidForm(<?php echo $work->id; ?>)">Edit Bid</button>';
+                            break;
+
+                        default:
+                            echo "Bid Submitted";
+                            echo '<button onclick="showBidForm(<?php echo $work->id; ?>)">Edit Bid</button>';
+                            break;
                     }
                 }
-            ?>
-                <!-- Display "Bid Submitted" and "Edit Bid" button -->
-                <p>Bid Status: Bid Submitted</p>
-                <button onclick="showBidForm(<?php echo $work->id; ?>)">Edit Bid</button>
-            <?php else: ?>
-                <?php
                 
-                        $w  = array();
-                   
             ?>
+            
+                <!-- Display "Bid Submitted" and "Edit Bid" button -->
+                <!-- <p>Bid Status: Bid Submitted</p> -->
+                
+            <?php  else: ?>
+                <?php
+                    $w  = array();
+                ?>
                 <!-- Display "Post Bid" button -->
                 <button onclick="showBidForm(<?php echo $work->id; ?>)">Post Bid</button>
             <?php endif; ?>
