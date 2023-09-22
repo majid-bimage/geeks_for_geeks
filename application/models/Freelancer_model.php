@@ -86,5 +86,18 @@ class Freelancer_model extends CI_Model {
         return $query->result();
     }
 
+    public function get_freelancer(){
+        $this->db->from('freelancers');
+        // $this->db->where('freelancer_id', $freelancer_id);
+        $query = $this->db->get();
     
+        $freelancers = $query->result_array();
+    
+        if (empty($freelancers)) {
+            // If the freelancer has no skills, return an empty array
+            return array();
+        }else{
+            return $freelancers;
+        }
+    }
 }

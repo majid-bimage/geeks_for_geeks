@@ -1,89 +1,74 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Customer Dashboard</title>
-    <!-- Latest compiled and minified CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Latest compiled JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-</head>
-<body>
+<div class="container">
+    <h2 class="text-center">Welcome to Your Customer Dashboard</h2>
 
-<h2>Welcome to Your Customer Dashboard</h2>
+    <p>Hello, <?php echo $this->session->userdata('username'); ?>!</p>
 
-<p>Hello, <?php echo $this->session->userdata('username'); ?>!</p>
+    <!-- Add your dashboard content here -->
+    <div class="row">
+        <div class="col-sm-4">
+            <h2>Post New Work</h2>
 
-<!-- Add your dashboard content here -->
+            <?php echo validation_errors('<div class="validation-errors">', '</div>'); ?>
 
-<div>
-   
+            <?php echo form_open('customer/post-work'); ?>
 
+            <div class="mb-3">
+                <label for="work_title" class="form-label">Work Title:</label>
+                <input class="form-control" type="text" name="work_title" required>
+            </div>
 
-</div>
-<div class="row">
-<div class="col-sm-6">
-       
-<h2>Post New Work</h2>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description:</label>
+                <textarea class="form-control" name="description" required></textarea>
+            </div>
 
-<?php echo validation_errors(); ?>
+            <div class="mb-3">
+                <label for="duration" class="form-label">Duration (in days):</label>
+                <input class="form-control" type="number" name="duration" required>
+            </div>
 
-<?php echo form_open('customer/post-work'); ?>
+            <div class="mb-3">
+                <label for="budget" class="form-label">Budget ($):</label>
+                <input class="form-control" type="number" name="budget" required>
+            </div>
 
-<label for="work_title">Work Title:</label>
-<input type="text" name="work_title" required><br>
+            <div class="mb-3">
+                <label for="skills" class="form-label">Skills Required:</label>
+                <select class="form-select" name="skills[]" multiple="multiple" required>
+                    <?php foreach ($skills as $skill): ?>
+                        <option value="<?php echo $skill->id; ?>"><?php echo $skill->skill_name; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
 
-<label for="description">Description:</label>
-<textarea name="description" required></textarea><br>
+            <input class="btn btn-primary" type="submit" value="Post Work">
 
-<label for="duration">Duration (in days):</label>
-<input type="number" name="duration" required><br>
-
-<label for="budget">Budget ($):</label>
-<input type="number" name="budget" required><br>
-
-<label for="skills">Skills Required:</label>
-<select name="skills[]" multiple="multiple" required>
-    <?php foreach ($skills as $skill): ?>
-        <option value="<?php echo $skill->id; ?>"><?php echo $skill->skill_name; ?></option>
-    <?php endforeach; ?>
-</select><br>
-
-<input type="submit" value="Post Work">
-
-</form>
+            <?php echo form_close(); ?>
+        </div>
+        <div class="col-sm-4">
+            <h3>Posted works</h3>
+            <ul class="list-group">
+                <?php foreach ($posted_works as $work): ?>
+                    <li class="list-group-item">
+                        <strong>Work Title:</strong> <?php echo $work->work_title; ?><br>
+                        <strong>Description:</strong> <?php echo $work->description; ?><br>
+                        <?php if ($bids_received[$work->id]): ?>
+                            <strong>Bids received:</strong> <?php echo count($bids_received[$work->id]); ?> <a href="<?php echo base_url()."index.php/view_bids/".$work->id; ?>">View Bids</a><br>
+                        <?php else: ?>
+                            <strong>Bids received:</strong> 0<br>
+                        <?php endif; ?>
+                        <!-- Display other work details here -->
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
     </div>
-    <div class="col-sm-6">
-        <h3>Posted works</h3>
-        <ul>
-    <?php foreach ($posted_works as $work): ?>
-        <li>
-            <strong>Work Title:</strong> <?php echo $work->work_title; ?><br>
-            <strong>Description:</strong> <?php echo $work->description; ?><br>
-            <?php 
-            if($bids_received[$work->id]){
-
-            
-            ?>
-            <strong>Bids received:</strong> <?php echo count($bids_received[$work->id]); ?> <a href="<?php echo base_url()."view_bids/".$work->id; ?>">View Bids</a><br>
-            <?php }else{
-            ?>
-
-                <strong>Bids received:</strong> <?php echo 0; ?><br>
-
-            <?php }
-
-            ?>
-            <!-- Display other work details here -->
-        </li>
-    <?php endforeach; ?>
-</ul>
-    </div>
+    <br>
+    <a class="btn btn-danger" href="<?php echo base_url('logout'); ?>">Logout</a>
 </div>
 
-<a href="<?php echo base_url('logout'); ?>">Logout</a>
-
+<!-- Add Bootstrap JS script link (optional) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 </body>
-
-
 </html>

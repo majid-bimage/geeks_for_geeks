@@ -43,7 +43,6 @@ class Login extends CI_Controller {
                     'logged_in' => TRUE,
                 );
                 $this->session->set_userdata($user_data);
-                $data['skills'] = $this->Skill_model->get_skills();
                 // Redirect to the appropriate dashboard or profile page based on user role
                 if ($user->role === 'freelancer') {
                     // $this->load->view('freelancer_dashboard_view',$data); // Load freelancer dashboard
@@ -54,7 +53,8 @@ class Login extends CI_Controller {
 
                     redirect('customer');
                 } elseif ($user->role === 'admin') {
-                    $this->load->view('admin_dashboard_view',$data); // Load customer dashboard
+                    redirect('Admin'); // Load customer dashboard
+
                 }
             } else {
                 // Authentication failed, show an error message

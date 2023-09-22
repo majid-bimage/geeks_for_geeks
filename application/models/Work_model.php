@@ -53,4 +53,35 @@ class Work_model extends CI_Model {
              return array(); // Return an empty array if no skills are found
          }
     }
+
+    public function get_accepted_works_by_freelancer($freelancer_id) {
+        $this->db->select('w.*');
+        $this->db->from('works w');
+        $this->db->join('bids b', 'b.work_id = w.id');
+        $this->db->where('b.freelancer_id', $freelancer_id);
+        $this->db->where('b.status', 1); // Assuming 'accepted' is the status for accepted bids
+        $query = $this->db->get();
+
+        return $query->result();
+    }
+    public function mark_work_as_completed($work_id) {
+        $data = array(
+            'status' => 1, // Set the status to "completed" or any appropriate value
+        );
+    
+        $this->db->where('id', $work_id);
+        $this->db->update('works', $data);
+    }
+
+    public function get_completed_works_by_freelancer($freelancer_id) {
+        $this->db->select('w.*');
+        $this->db->from('works w');
+        $this->db->join('bids b', 'b.work_id = w.id');
+        $this->db->where('b.freelancer_id', $freelancer_id);
+        $this->db->where('b.status', 1); // Assuming 'completed' is the status for completed works
+        $query = $this->db->get();
+
+        return $query->result();
+    }
+    
 }

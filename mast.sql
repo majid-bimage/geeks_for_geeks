@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 19, 2023 at 02:38 PM
+-- Generation Time: Sep 22, 2023 at 02:49 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -42,7 +42,8 @@ CREATE TABLE `bids` (
 --
 
 INSERT INTO `bids` (`id`, `freelancer_id`, `work_id`, `bid_amount`, `proposal`, `created_at`, `status`) VALUES
-(1, 1, 2, '1.00', 'a', '2023-09-08 05:19:05', 1);
+(1, 1, 2, '1.00', 'a', '2023-09-08 05:19:05', 1),
+(2, 1, 3, '5.00', 'qwertyu uiop', '2023-09-22 11:29:18', 0);
 
 -- --------------------------------------------------------
 
@@ -180,6 +181,7 @@ CREATE TABLE `works` (
   `duration` int(11) DEFAULT NULL,
   `budget` decimal(10,2) DEFAULT NULL,
   `skills_required` text DEFAULT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -188,10 +190,10 @@ CREATE TABLE `works` (
 -- Dumping data for table `works`
 --
 
-INSERT INTO `works` (`id`, `customer_id`, `work_title`, `description`, `duration`, `budget`, `skills_required`, `created_at`, `updated_at`) VALUES
-(2, 4, 'test', 'as', 1, '1.00', NULL, '2023-09-07 07:22:51', '2023-09-07 07:22:51'),
-(3, 4, 'test2', 'test2', 40, '4.00', NULL, '2023-09-07 10:07:00', '2023-09-07 10:07:00'),
-(4, 4, 'test3', 'test3', 60, '10.00', NULL, '2023-09-07 10:07:27', '2023-09-07 10:07:27');
+INSERT INTO `works` (`id`, `customer_id`, `work_title`, `description`, `duration`, `budget`, `skills_required`, `status`, `created_at`, `updated_at`) VALUES
+(2, 4, 'test', 'as', 1, '1.00', NULL, 1, '2023-09-07 07:22:51', '2023-09-20 06:38:31'),
+(3, 4, 'test2', 'test2', 40, '4.00', NULL, 0, '2023-09-07 10:07:00', '2023-09-07 10:07:00'),
+(4, 4, 'test3', 'test3', 60, '10.00', NULL, 0, '2023-09-07 10:07:27', '2023-09-07 10:07:27');
 
 -- --------------------------------------------------------
 
@@ -286,7 +288,7 @@ ALTER TABLE `work_skills`
 -- AUTO_INCREMENT for table `bids`
 --
 ALTER TABLE `bids`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `customers`

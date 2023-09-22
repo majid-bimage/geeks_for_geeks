@@ -38,9 +38,10 @@ class Bid_model extends CI_Model {
     }
 
     public function get_bids_for_work($work_id) {
-        $this->db->select('*');
-        $this->db->from('bids');
-        $this->db->where('work_id', $work_id);
+        $this->db->select('b.*, f.first_name, f.last_name, f.phone_number'); // Include the freelancer details you need
+        $this->db->from('bids b');
+        $this->db->join('freelancers f', 'f.id = b.freelancer_id');
+        $this->db->where('b.work_id', $work_id);
         $query = $this->db->get();
 
         return $query->result();

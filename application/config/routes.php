@@ -60,10 +60,13 @@ $route['skills'] = 'Skills';
 $route['customer/post-work'] = 'CustomerRegistration/post_work';
 $route['customer'] = 'CustomerRegistration/customer_dashboard';
 $route['Freelancer'] = 'FreelancerRegistration/freelancer_dashboard';
+$route['Admin'] = 'AdminController/dashboard';
 $route['freelancer/manage_skills'] = 'FreelancerRegistration/update_skills';
 $route['freelancer/submit_bid'] = 'FreelancerRegistration/submit_bid';
 $route['view_bids/(:num)'] = 'CustomerRegistration/view_bids/$1';
 $route['accept_bid/(:num)'] = 'CustomerRegistration/accept_bid/$1';
+$route['markascompleted/(:num)'] = 'FreelancerRegistration/mark_as_completed/$1';
+
 
 
 

@@ -8,8 +8,7 @@ class FreelancerRegistration extends CI_Controller {
         $this->load->model('Freelancer_model'); // Load the Freelancer model
         $this->load->model('Skill_model'); // Load the Skill_model model
         $this->load->model('Bid_model'); // Load the Bid_model model
-
-        
+        $this->load->model('Work_model'); // Load the Work_model model
         $this->load->helper('form');
     }
 
@@ -19,24 +18,24 @@ class FreelancerRegistration extends CI_Controller {
     }
 
     
-// Define the callback function
-public function email_check($email)
-{
-    // Load the database library if it's not autoloaded
-    $this->load->database();
+    // Define the callback function
+    public function email_check($email)
+    {
+        // Load the database library if it's not autoloaded
+        $this->load->database();
 
-    // Query the 'freelancers' table to check for the email's uniqueness
-    $query = $this->db->get_where('freelancers', ['email' => $email]);
+        // Query the 'freelancers' table to check for the email's uniqueness
+        $query = $this->db->get_where('freelancers', ['email' => $email]);
 
-    // If no rows are found, the email is unique
-    if ($query->num_rows() === 0) {
-        return true;
-    } else {
-        // If there are rows, the email is not unique
-        $this->form_validation->set_message('email_check', 'The email address is already in use.');
-        return false;
+        // If no rows are found, the email is unique
+        if ($query->num_rows() === 0) {
+            return true;
+        } else {
+            // If there are rows, the email is not unique
+            $this->form_validation->set_message('email_check', 'The email address is already in use.');
+            return false;
+        }
     }
-}
 
 
 
@@ -82,6 +81,9 @@ public function email_check($email)
         // Retrieve skills from the Skill_model
         $data['skills'] = $this->Skill_model->get_skills();
 
+        // Get works for which bids got accepted by the freelancer
+        $data['accepted_works'] = $this->Work_model->get_accepted_works_by_freelancer($this->session->userdata('user_id'));
+
         // Get the freelancer's matching works
         $data['matching_works'] = $this->Freelancer_model->get_matching_works($this->session->userdata('user_id'));
 
@@ -90,14 +92,20 @@ public function email_check($email)
 
         $data['submitted_bids'] = $this->Bid_model->get_submitted_bids($this->session->userdata('user_id'));
         
+        // Get completed works for the freelancer
+        $data['completed_works'] = $this->Work_model->get_completed_works_by_freelancer($this->session->userdata('user_id'));
+
 
         $str ="";
-
+        $data['submitted_works'] = array();
         foreach ($data['submitted_bids'] as  $row){
-            $str = $str.",".$row['work_id'];
+            // $str = $str.",".$row['work_id'];
+            array_push($data['submitted_works'], $row['work_id']);
         }
-        $data['submitted_works'] = explode(',',$str);
+        // $data['submitted_works'] = explode(',',$str);
+        print_r($data['submitted_works']);
 
+        $this->load->view('header');
        
         $this->load->view('freelancer_dashboard_view', $data);
 
@@ -180,6 +188,15 @@ public function email_check($email)
         }
     }
     
+    public function mark_as_completed($work_id) {
+        // Implement validation and authorization checks as needed
+        // Check if the work is associated with the logged-in freelancer
     
+        // Update the work status as completed in your database
+        $this->Work_model->mark_work_as_completed($work_id);
+    
+        // Redirect back to the freelancer dashboard or any other relevant page
+        redirect('Freelancer');
+    }
     
 }

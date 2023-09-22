@@ -52,7 +52,7 @@ class CustomerRegistration extends CI_Controller {
             $data['bids_received'][$work->id] = $this->Bid_model->get_bids_for_work($work->id);
  
         }
-        
+        $this->load->view('header');
         $this->load->view('customer_dashboard_view',$data); // Load customer dashboard
     }
 

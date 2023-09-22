@@ -27,4 +27,18 @@ class Customer_model extends CI_Model {
 
         return $user_id; // Return the user ID for further use if needed
     }
+    public function get_customers(){
+        $this->db->from('customers');
+        // $this->db->where('freelancer_id', $freelancer_id);
+        $query = $this->db->get();
+    
+        $customers = $query->result_array();
+    
+        if (empty($customers)) {
+            // If the freelancer has no skills, return an empty array
+            return array();
+        }else{
+            return $customers;
+        }
+    }
 }
