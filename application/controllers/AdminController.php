@@ -15,7 +15,21 @@ class AdminController extends CI_Controller {
     public function dashboard(){
         $data['skills'] = $this->Skill_model->get_skills();
         $data['freelancers'] =$this->Freelancer_model->get_freelancer();
+        $this->load->view('admin/admin_header');
         $this->load->view('admin_dashboard_view',$data); // Load customer dashboard
+        $this->load->view('admin/admin_footer');
+    }
 
+    public function releasefundrequests(){
+            
+        $data['requests'] =$this->Bid_model->get_release_requests();
+        $this->load->view('admin/admin_header');
+        $this->load->view('admin/releasefundrequests',$data); // Load customer dashboard
+        $this->load->view('admin/admin_footer');
+    }
+
+    public function releasefund($bidid){
+        $this->Bid_model->releasefundbybid($bidid);
+        redirect('AdminController/releasefundrequests');
     }
 }

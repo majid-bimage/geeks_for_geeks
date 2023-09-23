@@ -116,11 +116,11 @@ class FreelancerRegistration extends CI_Controller {
     public function update_skills() {
         $freelancer_id = $this->session->userdata('user_id'); // Assuming you store freelancer's user_id in the session
 
-        if ($this->input->post('add')) {
+        if ($this->input->post('add_skill')) {
             // Add a skill to the freelancer's profile
             $skill_id = $this->input->post('add_skill');
             $this->Freelancer_model->add_skill($freelancer_id, $skill_id);
-        } elseif ($this->input->post('remove')) {
+        } elseif ($this->input->post('add_skill')) {
             // Remove a skill from the freelancer's profile
             $skill_id = $this->input->post('remove_skill');
             $this->Freelancer_model->remove_skill($freelancer_id, $skill_id);
@@ -174,6 +174,7 @@ class FreelancerRegistration extends CI_Controller {
             $this->form_validation->set_rules('proposal', 'Proposal', 'required');
     
             if ($this->form_validation->run() == FALSE) {
+                
                 // Form validation failed, display errors or handle accordingly
                 $this->load->view('edit_bid_form_view');
             } else {
@@ -182,7 +183,7 @@ class FreelancerRegistration extends CI_Controller {
                 $proposal = $this->input->post('proposal');
     
                 // Update the bid using the Bid_model
-                $this->Bid_model->update_bid($existing_bid->id, $bid_amount, $proposal);
+                $this->Bid_model->update_bid($existing_bid['id'], $bid_amount, $proposal);
     
                 // Redirect to the freelancer dashboard or show a success message
                 redirect('Freelancer');

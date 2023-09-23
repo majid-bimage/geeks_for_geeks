@@ -110,4 +110,44 @@ class Bid_model extends CI_Model {
 
         return true;
     }
+
+    public function get_release_requests(){
+        $this->db->select('*,b.status as bidstatus,b.id as bidid');
+        $this->db->from('bids b');
+        $this->db->join('works w', 'w.id = b.work_id');
+
+            $this->db->where('b.release_request', 1);
+
+        
+        $query = $this->db->get();
+
+        return $query->result_array();
+    
+
+    }
+
+    public function releasefundbybid($bidid){
+        $data = array(
+            'release_request' => 2, // Set the status to "accepted" or any appropriate value
+        );
+    
+        $this->db->where('id', $bidid);
+        $this->db->update('bids', $data);
+
+        return true;
+    
+    }
+    public function get_bid_by_freelancer_work($freelancer_id,$work_id){
+        $this->db->select('*');
+        $this->db->from('bids');
+        if($freelancer_id){
+            $this->db->where('freelancer_id', $freelancer_id);
+            $this->db->where('work_id', $work_id);
+
+
+        }
+        $query = $this->db->get();
+
+        return $query->row_array();
+    }
 }

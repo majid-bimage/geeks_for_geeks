@@ -51,10 +51,10 @@
 
             <ul class="list-group">
                 <li class="list-group-item">
-                    <a class="btn" href="<?php echo base_url('index.php/customer'); ?>">Dashboard Home</a>
+                    <a class="btn" href="<?php echo base_url('index.php/Admin'); ?>">Dashboard Home</a>
                 </li>
                 <li class="list-group-item">
-                    <a class="btn" href="<?php echo base_url('index.php/customer-accepted-bids'); ?>">Accepted Bids</a>
+                    <a class="btn" href="<?php echo base_url('index.php/release-fund-requests'); ?>">Release Funds</a>
                 </li>
             </ul>
 <a class="btn btn-danger mt-3" href="<?php echo base_url('index.php/logout'); ?>">Logout</a>

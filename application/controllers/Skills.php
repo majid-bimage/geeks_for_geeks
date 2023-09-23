@@ -34,7 +34,7 @@ class Skills extends CI_Controller {
             $this->Skill_model->insert_skill($data);
 
             // Redirect to a success page or reload the form with a success message
-            redirect('Skills');
+            redirect('Admin');
         }
     }
 }

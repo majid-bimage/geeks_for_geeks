@@ -68,13 +68,13 @@
                                         case 2:
                                             echo '<p class="text-danger">Bid Rejected</p>';
                                             echo '<button class="btn btn-primary" onclick="showBidForm('.$work->id.')">Edit Bid</button>';
-                                            echo "<form action='freelancer/edit_bid' method='post' id='bidForm_".$work->id."' style='display:none;'>"; 
+                                            echo "<form action='freelancer/edit_bid/".$work->id."' method='post' id='bidForm_".$work->id."' style='display:none;'>"; 
                                             break;
 
                                         default:
                                             echo '<p class="text-success">Bid Submitted</p>';
                                             echo '<button class="btn btn-primary" onclick="showBidForm('.$work->id.')">Edit Bid</button>';
-                                            echo "<form action='freelancer/edit_bid' method='post' id='bidForm_".$work->id."' style='display:none;'>"; 
+                                            echo "<form action='freelancer/edit_bid/".$work->id."' method='post' id='bidForm_".$work->id."' style='display:none;'>"; 
 
                                             break;
                                     }
