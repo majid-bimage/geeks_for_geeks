@@ -46,6 +46,14 @@
     <button type="submit" class="btn btn-primary">Login</button>
 
     <?php echo form_close(); ?>
+    <div class="m-3">
+        <strong>
+            New here ?
+        </strong>
+        <a href="<?php echo base_url('index.php/customer-registration'); ?>">Register as Customer</a>
+        <a href="<?php echo base_url('index.php/freelaner-registration'); ?>">Register as Developer</a>
+
+    </div>
 </div>
 
 <!-- Add Bootstrap JS script link (optional) -->

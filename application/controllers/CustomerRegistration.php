@@ -19,6 +19,8 @@ class CustomerRegistration extends CI_Controller {
 
     public function index() {
         // Load the registration form view for customers
+        $this->load->view('header');
+
         $this->load->view('customer_registration_view');
     }
 

@@ -14,6 +14,8 @@ class FreelancerRegistration extends CI_Controller {
 
     public function index() {
         // Load the registration form view for freelancers
+        $this->load->view('header');
+
         $this->load->view('freelancer_registration_view');
     }
 

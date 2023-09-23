@@ -65,7 +65,7 @@
         </div>
     </div>
     <br>
-    <a class="btn btn-danger" href="<?php echo base_url('logout'); ?>">Logout</a>
+    <a class="btn btn-danger" href="<?php echo base_url('index.php/logout'); ?>">Logout</a>
 </div>
 
 <!-- Add Bootstrap JS script link (optional) -->
