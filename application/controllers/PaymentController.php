@@ -6,7 +6,6 @@ class PaymentController extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Customer_model'); // Load the Customer model
-        $this->load->model('Payment_model'); // Load the Payment_model 
 
         
         $this->load->helper('form');
@@ -43,28 +42,51 @@ class PaymentController extends CI_Controller {
             echo json_encode(['error' => $e->getMessage()]);
         }
     }
-
     public function insert_payment_data() {
-        // Example data for insertion (replace with actual data)
-        $payment_data = array(
-            'order_id' => '123456',
-            'amount' => 100.00,
-            'currency' => 'INR',
-            'payment_status' => 'completed',
-            'customer_name' => 'John Doe',
-            'customer_email' => 'john@example.com',
-            'transaction_id' => 'TX123456',
-            'payment_method' => 'credit card',
-            'additional_info' => 'Additional payment info',
-        );
+        $this->load->model('Payment_model'); // Load the Payment_model 
 
-        // Insert the payment data into the database using the model
-        $inserted = $this->Payment_model->insert_payment($payment_data);
-
-        if ($inserted) {
-            echo "Payment data inserted successfully.";
+        // Get the raw POST data as a JSON string
+        $rawData = file_get_contents("php://input");
+        
+        // Decode the JSON data into an associative array
+        $paymentData = json_decode($rawData, true);
+        
+        // Check if the data was successfully decoded
+        if ($paymentData !== null) {
+            // Insert the payment data into the database
+            $this->load->database(); // Load the database library
+            $insertData = array(
+                'order_id' => $paymentData['order_id'],
+                'amount' => $paymentData['amount'],
+                'customer_id' => $paymentData['customer_id'],
+                'bid' => $paymentData['bid'],
+                'currency' => $paymentData['currency'],
+                'payment_status' => $paymentData['payment_status'],
+                'customer_name' => $paymentData['customer_name'],
+                'customer_email' => $paymentData['customer_email'],
+                'transaction_id' => $paymentData['transaction_id'],
+                'payment_method' => $paymentData['payment_method'],
+                'additional_info' => $paymentData['additional_info']
+            );
+            
+            $this->db->insert('payments', $insertData);
+            
+            // Check if the insertion was successful
+            if ($this->db->affected_rows() > 0) {
+                $response = array('status' => 'success', 'message' => 'Payment data inserted successfully');
+            } else {
+                $response = array('status' => 'error', 'message' => 'Failed to insert payment data');
+            }
         } else {
-            echo "Failed to insert payment data.";
+            $response = array('status' => 'error', 'message' => 'Invalid JSON data');
         }
+        
+        // Return a JSON response
+        // $this->output
+        //     ->set_content_type('application/json')
+        //     ->set_output(json_encode($response));
+
+        echo json_encode($response);
     }
+
 }

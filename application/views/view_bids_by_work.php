@@ -4,7 +4,7 @@
 <div class="container">
 
 <div class="container-fluid">
-
+    <input type="hidden" value="<?php echo $this->session->userdata('user_id'); ?>" id="user_id">
 <div class="row">
     <div class="col-sm-6">
         <h2>Work Details</h2>
@@ -99,7 +99,7 @@
                     dataType: "json", 
                     success: function(response) {
                         // Display the response from the server
-                        console.log(response.id);
+                        console.log(response);
                         $("#order-response").html(response);
                         if (response.id) {
                             // Redirect the user to the Razorpay payment page
@@ -107,7 +107,8 @@
                             // var razorpay_payment_url = 'https://api.razorpay.com/v1/checkout/embedded';
                             // var redirect_url = razorpay_payment_url + '/' + order_id;
                             // window.location.href = redirect_url;
-                            pay(response.id,amount);
+                            
+                            pay(response.id,amount,bid);
                         } else {
                             // Handle errors or display a message to the user
                             $("#order-response").html('Error: ' + response.error);
@@ -125,7 +126,7 @@
 <button id="rzp-button1">Pay</button>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
-    function pay(order_id,amount){
+    function pay(order_id,amount,bid){
 var options = {
     "key": "rzp_test_iUQcWB2aQqJXPM", // Enter the Key ID generated from the Dashboard
     "amount": amount*100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
@@ -135,10 +136,17 @@ var options = {
     "image": "https://example.com/your_logo",
     "order_id": order_id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
     "handler": function (response){
-        alert(response.razorpay_payment_id);
-        alert(response.razorpay_order_id);
-        alert(response.razorpay_signature)
-        insertToPaymentTable(response.razorpay_order_id, amount,customer_name,customer_email,response.razorpay_payment_id,payment_method,response.razorpay_signature);
+        // alert(response.razorpay_payment_id);
+        // alert(response.razorpay_order_id);
+        // alert(response.razorpay_signature);
+        var payment_method = null;
+        
+        var customer_id = "<?php  echo $this->session->userdata('user_id'); ?>";
+        var customer_name = "<?php  echo $this->session->userdata('username'); ?>";
+        var customer_email = "<?php  echo $this->session->userdata('email'); ?>";
+
+
+        insertToPaymentTable(response.razorpay_order_id, amount,customer_id,bid,customer_name,customer_email,response.razorpay_payment_id,payment_method,response.razorpay_signature);
     },
     "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information, especially their phone number
         "name": "Gaurav Kumar", //your customer's name
@@ -169,14 +177,16 @@ rzp1.on('payment.failed', function (response){
     }
 
 
-    function insertToPaymentTable(order_id, amount,customer_name,customer_email,transaction_id,payment_method,additional_info){
+    function insertToPaymentTable(order_id, amount,customer_id,bid,customer_name,customer_email,transaction_id,payment_method,additional_info){
         var paymentData = {
         order_id: order_id,
         amount: amount, // Replace with the actual amount
+        customer_id:customer_id,
+        bid:bid,
         currency: 'INR', // Replace with the actual currency
         payment_status: 'completed', // Replace with the actual payment status
-        customer_name: 'John Doe', // Replace with the customer's name
-        customer_email: 'john@example.com', // Replace with the customer's email
+        customer_name: customer_name, // Replace with the customer's name
+        customer_email: customer_email, // Replace with the customer's email
         transaction_id: transaction_id, // Replace with the actual transaction ID
         payment_method: 'credit card', // Replace with the payment method
         additional_info: 'Additional payment info' // Replace with additional information
@@ -190,6 +200,10 @@ rzp1.on('payment.failed', function (response){
         dataType: "json",
         success: function(response) {
             console.log(response); // Handle the server response
+            if(response){
+                window.location.href="<?php echo base_url('index.php/CustomerRegistration/accept_bid/'); ?>"+bid;
+
+            }
         },
         error: function(error) {
             console.error("Error:", error);

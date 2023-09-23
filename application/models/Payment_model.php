@@ -1,4 +1,3 @@
-// application/models/Payment_model.php
 <?php
 class Payment_model extends CI_Model {
     public function insert_payment($data) {
