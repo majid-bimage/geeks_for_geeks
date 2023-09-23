@@ -1,8 +1,4 @@
-
-<div class="container">
-    <h2 class="text-center">Welcome to Your Customer Dashboard</h2>
-
-    <p>Hello, <?php echo $this->session->userdata('username'); ?>!</p>
+<div class="col-sm-9">
 
     <!-- Add your dashboard content here -->
     <div class="row">
@@ -65,10 +61,4 @@
         </div>
     </div>
     <br>
-    <a class="btn btn-danger" href="<?php echo base_url('index.php/logout'); ?>">Logout</a>
-</div>
-
-<!-- Add Bootstrap JS script link (optional) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-</body>
-</html>
+                        </div>

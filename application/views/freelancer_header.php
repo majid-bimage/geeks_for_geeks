@@ -42,3 +42,21 @@
         }
     </style>
 <body>
+    
+
+<div class="container-fluid mt-5">
+    <div class="row">
+        <div class="col-sm-3">
+    <p>Hello, <?php echo $this->session->userdata('username'); ?>!</p>
+
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <a class="btn" href="<?php echo base_url('index.php/Freelancer'); ?>">Dashboard Home</a>
+                </li>
+                <li class="list-group-item">
+                    <a class="btn" href="<?php echo base_url('index.php/freelancer-accepted-bids'); ?>">Accepted Bids</a>
+                </li>
+            </ul>
+<a class="btn btn-danger mt-3" href="<?php echo base_url('index.php/logout'); ?>">Logout</a>
+
+        </div>

@@ -54,8 +54,10 @@ class CustomerRegistration extends CI_Controller {
             $data['bids_received'][$work->id] = $this->Bid_model->get_bids_for_work($work->id);
  
         }
-        $this->load->view('header');
+        $this->load->view('customer/customer_header');
         $this->load->view('customer_dashboard_view',$data); // Load customer dashboard
+        $this->load->view('customer/customer_footer');
+
     }
 
     public function register() {
@@ -142,6 +144,18 @@ class CustomerRegistration extends CI_Controller {
 
         // Redirect back to the work details page or any other relevant page
         redirect('customer');
+    }
+    public function acceptedbids(){
+        $data['accepted_bids'] = $this->Bid_model->get_accepted_bids_by_customer($this->session->userdata('user_id'));
+        $this->load->view('customer/customer_header');
+        $this->load->view('customer/customer_acceptedbids',$data); // Load customer dashboard
+        $this->load->view('customer/customer_footer');
+
+    }
+    public function releasefund($bidid){
+        $this->Bid_model->releasefund($bidid);
+        redirect('CustomerRegistration/acceptedbids');
+
     }
         
 }

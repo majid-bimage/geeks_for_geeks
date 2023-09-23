@@ -66,6 +66,9 @@ $route['freelancer/submit_bid'] = 'FreelancerRegistration/submit_bid';
 $route['view_bids/(:num)'] = 'CustomerRegistration/view_bids/$1';
 $route['accept_bid/(:num)'] = 'CustomerRegistration/accept_bid/$1';
 $route['markascompleted/(:num)'] = 'FreelancerRegistration/mark_as_completed/$1';
+$route['freelancer-accepted-bids'] = 'FreelancerRegistration/acceptedbids';
+$route['customer-accepted-bids'] = 'CustomerRegistration/acceptedbids';
+
 
 
 

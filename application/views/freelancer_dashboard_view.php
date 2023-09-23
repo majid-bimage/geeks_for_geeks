@@ -1,8 +1,7 @@
+<div class="col-sm-9">
 
-
-<div class="container mt-5">
+       
     <h2 class="text-center">Welcome to Your Freelancer Dashboard</h2>
-    <p>Hello, <?php echo $this->session->userdata('username'); ?>!</p>
 
     <!-- Add your dashboard content here -->
 
@@ -126,11 +125,11 @@
     </div>
 
 </div>
-
-<a class="btn btn-danger mt-3" href="<?php echo base_url('index.php/logout'); ?>">Logout</a>
+</div>
+    </div>
 
 <!-- Add Bootstrap JS script link (optional) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script> -->
 <script>
     function showBidForm(workId) {
         // Show the bid form for the specified work

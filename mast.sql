@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 23, 2023 at 11:52 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.0.25
+-- Generation Time: Sep 23, 2023 at 05:05 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.3.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,16 +34,18 @@ CREATE TABLE `bids` (
   `bid_amount` decimal(10,2) NOT NULL,
   `proposal` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `status` tinyint(4) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `status` tinyint(4) NOT NULL DEFAULT 0,
+  `work_progress` int(11) NOT NULL DEFAULT 0,
+  `release_request` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `bids`
 --
 
-INSERT INTO `bids` (`id`, `freelancer_id`, `work_id`, `bid_amount`, `proposal`, `created_at`, `status`) VALUES
-(1, 1, 2, '1.00', 'a', '2023-09-08 05:19:05', 1),
-(2, 1, 3, '5.00', 'qwertyu uiop', '2023-09-22 11:29:18', 1);
+INSERT INTO `bids` (`id`, `freelancer_id`, `work_id`, `bid_amount`, `proposal`, `created_at`, `status`, `work_progress`, `release_request`) VALUES
+(1, 1, 2, '1.00', 'a', '2023-09-08 05:19:05', 1, 2, 1),
+(2, 1, 3, '5.00', 'qwertyu uiop', '2023-09-22 11:29:18', 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -61,7 +63,7 @@ CREATE TABLE `customers` (
   `address` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `customers`
@@ -90,7 +92,7 @@ CREATE TABLE `freelancers` (
   `location` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `freelancers`
@@ -109,7 +111,7 @@ CREATE TABLE `freelancer_skills` (
   `id` int(11) NOT NULL,
   `freelancer_id` int(11) NOT NULL,
   `skill_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `freelancer_skills`
@@ -139,7 +141,7 @@ CREATE TABLE `payments` (
   `transaction_id` varchar(255) DEFAULT NULL,
   `payment_method` varchar(50) DEFAULT NULL,
   `additional_info` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `payments`
@@ -160,7 +162,7 @@ CREATE TABLE `skills` (
   `description` text DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `skills`
@@ -185,7 +187,7 @@ CREATE TABLE `users` (
   `status` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
@@ -213,7 +215,7 @@ CREATE TABLE `works` (
   `status` tinyint(4) NOT NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `works`
@@ -234,7 +236,7 @@ CREATE TABLE `work_skills` (
   `id` int(11) NOT NULL,
   `work_id` int(11) NOT NULL,
   `skill_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `work_skills`

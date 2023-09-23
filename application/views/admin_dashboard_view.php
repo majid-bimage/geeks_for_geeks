@@ -1,32 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <!-- Add Bootstrap CSS link -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <style>
-        /* Custom CSS for additional styling */
-        body {
-            background-color: #f8f9fa;
-            padding-top: 20px;
-        }
-
-        .container {
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            margin-top: 20px;
-            padding: 20px;
-        }
-    </style>
-</head>
-<body>
-<div class="container">
-    <h2 class="text-center">Welcome to the Admin Dashboard</h2>
-
-    <p>Hello, <?php echo $this->session->userdata('username'); ?>!</p>
+<div class="col-sm-9">
 
     <!-- Add your admin dashboard content here -->
     <div class="container-fluid">
@@ -84,10 +56,4 @@
         
     </div>
 
-    <a href="<?php echo base_url('index.php/logout'); ?>" class="btn btn-danger">Logout</a>
-</div>
-
-<!-- Add Bootstrap JS script link (optional) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-</body>
-</html>
+    </div>

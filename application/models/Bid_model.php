@@ -57,4 +57,57 @@ class Bid_model extends CI_Model {
 
         return true;
     }
+    public function get_accepted_bids($freelancer_id){
+        $this->db->select('*,b.status as bidstatus,b.id as bidid');
+        $this->db->from('bids b');
+        $this->db->join('works w', 'w.id = b.work_id');
+
+        if($freelancer_id){
+            $this->db->where('freelancer_id', $freelancer_id);
+            $this->db->where('b.status', 1);
+
+        }
+        $query = $this->db->get();
+
+        return $query->result_array();
+    
+    }
+
+    
+    
+    public function get_accepted_bids_by_customer($customer_id){
+        $this->db->select('*,b.status as bidstatus,b.id as bidid');
+        $this->db->from('bids b');
+        $this->db->join('works w', 'w.id = b.work_id');
+
+        if($customer_id){
+            $this->db->where('customer_id', $customer_id);
+            $this->db->where('b.status', 1);
+
+        }
+        $query = $this->db->get();
+
+        return $query->result_array();
+    
+    }
+    public function markcompleted($bidid,$bidstatus){
+        $data = array(
+            'work_progress' => $bidstatus, // Set the status to "accepted" or any appropriate value
+        );
+    
+        $this->db->where('id', $bidid);
+        $this->db->update('bids', $data);
+
+        return true;
+    }
+    public function releasefund($bidid){
+        $data = array(
+            'release_request' => 1, // Set the status to "accepted" or any appropriate value
+        );
+    
+        $this->db->where('id', $bidid);
+        $this->db->update('bids', $data);
+
+        return true;
+    }
 }

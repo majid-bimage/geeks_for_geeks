@@ -107,7 +107,7 @@ class FreelancerRegistration extends CI_Controller {
         // $data['submitted_works'] = explode(',',$str);
         print_r($data['submitted_works']);
 
-        $this->load->view('header');
+        $this->load->view('freelancer_header');
        
         $this->load->view('freelancer_dashboard_view', $data);
 
@@ -200,5 +200,21 @@ class FreelancerRegistration extends CI_Controller {
         // Redirect back to the freelancer dashboard or any other relevant page
         redirect('Freelancer');
     }
+
+    public function acceptedbids(){
+        $data['accepted_bids'] = $this->Bid_model->get_accepted_bids($this->session->userdata('user_id'));
+        $this->load->view('freelancer_header');
+        $this->load->view('freelancer/acceptedbids',$data);
+        $this->load->view('freelancer/freelancer_footer');
+
+
+    }
     
+    public function markcompleted(){
+        $bidid = $this->input->post('bidid');
+        $bidstatus = $this->input->post('bidstatus');
+        $this->Bid_model->markcompleted($bidid,$bidstatus);
+        redirect('freelancer-accepted-bids');
+
+    }
 }
