@@ -56,6 +56,12 @@
                 <li class="list-group-item">
                     <a class="btn" href="<?php echo base_url('index.php/freelancer-accepted-bids'); ?>">Accepted Bids</a>
                 </li>
+
+                <li class="list-group-item">
+                    <a class="btn" href="<?php echo base_url('index.php/freelancer-collaboration'); ?>">Collaborate </a>
+                </li>
+
+
             </ul>
 <a class="btn btn-danger mt-3" href="<?php echo base_url('index.php/logout'); ?>">Logout</a>
 

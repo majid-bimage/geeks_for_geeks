@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 23, 2023 at 05:05 PM
+-- Generation Time: Oct 03, 2023 at 07:11 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.3.33
 
@@ -44,8 +44,35 @@ CREATE TABLE `bids` (
 --
 
 INSERT INTO `bids` (`id`, `freelancer_id`, `work_id`, `bid_amount`, `proposal`, `created_at`, `status`, `work_progress`, `release_request`) VALUES
-(1, 1, 2, '1.00', 'a', '2023-09-08 05:19:05', 1, 2, 1),
-(2, 1, 3, '5.00', 'qwertyu uiop', '2023-09-22 11:29:18', 1, 0, 0);
+(1, 1, 2, '1.00', 'a', '2023-09-08 05:19:05', 1, 2, 2),
+(2, 1, 3, '5.00', 'qwertyu uiop', '2023-09-22 11:29:18', 1, 2, 2),
+(3, 1, 5, '9.00', 'test proposal', '2023-09-23 17:51:06', 0, 0, 0),
+(4, 1, 6, '97.00', 'test proposal 2', '2023-09-23 17:54:39', 1, 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `collaboration`
+--
+
+CREATE TABLE `collaboration` (
+  `id` int(11) NOT NULL,
+  `filename` text NOT NULL,
+  `note` text NOT NULL,
+  `freelancer_id` int(11) NOT NULL,
+  `shared_by` int(11) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `collaboration`
+--
+
+INSERT INTO `collaboration` (`id`, `filename`, `note`, `freelancer_id`, `shared_by`, `created_at`) VALUES
+(1, 'C:\\xampp\\htdocs\\geek\\uploads/sign_aj2.html', '', 1, 0, '2023-09-24 21:59:34'),
+(2, 'C:\\xampp\\htdocs\\geek\\uploads\\2.png', '', 1, 0, '2023-09-24 22:38:31'),
+(3, 'C:\\xampp\\htdocs\\geek\\uploads/11.png', 'test', 1, 0, '2023-09-24 22:47:06'),
+(4, 'C:/xampp/htdocs/geek/uploads/111.png', 'test', 1, 1, '2023-09-24 22:50:01');
 
 -- --------------------------------------------------------
 
@@ -119,7 +146,10 @@ CREATE TABLE `freelancer_skills` (
 
 INSERT INTO `freelancer_skills` (`id`, `freelancer_id`, `skill_id`) VALUES
 (1, 1, 1),
-(2, 1, 2);
+(2, 1, 2),
+(3, 1, 5),
+(4, 1, 4),
+(5, 1, 6);
 
 -- --------------------------------------------------------
 
@@ -148,7 +178,8 @@ CREATE TABLE `payments` (
 --
 
 INSERT INTO `payments` (`payment_id`, `order_id`, `amount`, `currency`, `payment_status`, `payment_date`, `customer_id`, `bid`, `customer_name`, `customer_email`, `transaction_id`, `payment_method`, `additional_info`) VALUES
-(8, 'order_MfjWTjtIuRqgwY', '5.00', 'INR', 'completed', '2023-09-23 09:49:46', 4, 2, 'customer@customer.in', 'customer@customer.in', 'pay_MfjWfbnZv4fOcF', 'credit card', 'Additional payment info');
+(8, 'order_MfjWTjtIuRqgwY', '5.00', 'INR', 'completed', '2023-09-23 09:49:46', 4, 2, 'customer@customer.in', 'customer@customer.in', 'pay_MfjWfbnZv4fOcF', 'credit card', 'Additional payment info'),
+(9, 'order_Mfs2sBEryXEyfp', '97.00', 'INR', 'completed', '2023-09-23 18:10:00', 4, 4, 'customer@customer.in', 'customer@customer.in', 'pay_Mfs37BeHrzIDbE', 'credit card', 'Additional payment info');
 
 -- --------------------------------------------------------
 
@@ -170,7 +201,11 @@ CREATE TABLE `skills` (
 
 INSERT INTO `skills` (`id`, `skill_name`, `description`, `created_at`, `updated_at`) VALUES
 (1, 'php', '', '2023-09-06 10:20:54', '2023-09-06 10:20:54'),
-(2, 'javascript', 'v8', '2023-09-07 10:05:22', '2023-09-07 10:05:22');
+(2, 'javascript', 'v8', '2023-09-07 10:05:22', '2023-09-07 10:05:22'),
+(3, 'python', 'python', '2023-09-23 15:37:57', '2023-09-23 15:37:57'),
+(4, 'ruby', 'ruby', '2023-09-23 15:39:16', '2023-09-23 15:39:16'),
+(5, 'c#', 'c#', '2023-09-23 15:40:17', '2023-09-23 15:40:17'),
+(6, 'java', 'java', '2023-09-23 17:53:26', '2023-09-23 17:53:26');
 
 -- --------------------------------------------------------
 
@@ -224,7 +259,9 @@ CREATE TABLE `works` (
 INSERT INTO `works` (`id`, `customer_id`, `work_title`, `description`, `duration`, `budget`, `skills_required`, `status`, `created_at`, `updated_at`) VALUES
 (2, 4, 'test', 'as', 1, '1.00', NULL, 1, '2023-09-07 07:22:51', '2023-09-20 06:38:31'),
 (3, 4, 'test2', 'test2', 40, '4.00', NULL, 0, '2023-09-07 10:07:00', '2023-09-07 10:07:00'),
-(4, 4, 'test3', 'test3', 60, '10.00', NULL, 0, '2023-09-07 10:07:27', '2023-09-07 10:07:27');
+(4, 4, 'test3', 'test3', 60, '10.00', NULL, 0, '2023-09-07 10:07:27', '2023-09-07 10:07:27'),
+(5, 4, 'new work test', 'new work test with ruby', 30, '10.00', NULL, 0, '2023-09-23 15:41:06', '2023-09-23 15:41:06'),
+(6, 4, 'new work test2', 'with skill java only', 90, '100.00', NULL, 0, '2023-09-23 17:54:04', '2023-09-23 17:54:04');
 
 -- --------------------------------------------------------
 
@@ -246,7 +283,9 @@ INSERT INTO `work_skills` (`id`, `work_id`, `skill_id`) VALUES
 (1, 2, 1),
 (2, 3, 2),
 (3, 4, 1),
-(4, 4, 2);
+(4, 4, 2),
+(5, 5, 4),
+(6, 6, 6);
 
 --
 -- Indexes for dumped tables
@@ -259,6 +298,12 @@ ALTER TABLE `bids`
   ADD PRIMARY KEY (`id`),
   ADD KEY `freelancer_id` (`freelancer_id`),
   ADD KEY `work_id` (`work_id`);
+
+--
+-- Indexes for table `collaboration`
+--
+ALTER TABLE `collaboration`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `customers`
@@ -326,7 +371,13 @@ ALTER TABLE `work_skills`
 -- AUTO_INCREMENT for table `bids`
 --
 ALTER TABLE `bids`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `collaboration`
+--
+ALTER TABLE `collaboration`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `customers`
@@ -344,19 +395,19 @@ ALTER TABLE `freelancers`
 -- AUTO_INCREMENT for table `freelancer_skills`
 --
 ALTER TABLE `freelancer_skills`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `skills`
 --
 ALTER TABLE `skills`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -368,13 +419,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `works`
 --
 ALTER TABLE `works`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `work_skills`
 --
 ALTER TABLE `work_skills`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables

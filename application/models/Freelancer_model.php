@@ -100,4 +100,13 @@ class Freelancer_model extends CI_Model {
             return $freelancers;
         }
     }
+    public function get_shared_code($freelancer_id){
+        $this->db->select('*');
+        $this->db->from('collaboration c');
+        $this->db->join('freelancers f', 'f.user_id = c.shared_by');
+        $this->db->where('c.freelancer_id', $freelancer_id);
+        $query = $this->db->get();
+    
+        return $query->result();
+    }
 }

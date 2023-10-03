@@ -218,4 +218,35 @@ class FreelancerRegistration extends CI_Controller {
         redirect('freelancer-accepted-bids');
 
     }
+
+    public function collaboration(){
+        $data['freelancers'] =$this->Freelancer_model->get_freelancer();
+        $data['shared_code'] =$this->Freelancer_model->get_shared_code($this->session->userdata('user_id'));
+
+
+        $this->load->view('freelancer_header');
+        $this->load->view('freelancer/freelancer_collaboration',$data);
+        $this->load->view('freelancer/freelancer_footer');
+    }
+    public function uploadcode(){
+        $this->load->library('upload');
+      
+        $config = array();
+        $config['upload_path'] =  realpath(APPPATH . '../uploads');
+        $config['allowed_types'] = 'html|jpeg|png';
+        $config['max_size']      = '200000';
+    
+        $this->upload->initialize($config);
+
+        $this->upload->do_upload('codefile');
+        $data['filename']= $config['upload_path']."/".$this->upload->data('file_name');
+        $data['freelancer_id'] = $this->input->post('freelancer');
+        $data['note'] = $this->input->post('note');
+        $data['shared_by'] = $this->session->userdata('user_id');
+
+
+        $this->db->insert('collaboration', $data);
+        
+        redirect('freelancer-collaboration');
+    }
 }

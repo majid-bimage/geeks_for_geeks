@@ -71,6 +71,8 @@ $route['markascompleted/(:num)'] = 'FreelancerRegistration/mark_as_completed/$1'
 $route['freelancer-accepted-bids'] = 'FreelancerRegistration/acceptedbids';
 $route['customer-accepted-bids'] = 'CustomerRegistration/acceptedbids';
 $route['release-fund-requests'] = 'AdminController/releasefundrequests';
+$route['freelancer-collaboration'] = 'FreelancerRegistration/collaboration';
+
 
 
 
