@@ -239,7 +239,7 @@ class FreelancerRegistration extends CI_Controller {
         $this->upload->initialize($config);
 
         $this->upload->do_upload('codefile');
-        $data['filename']= $config['upload_path']."/".$this->upload->data('file_name');
+        $data['filename']= $this->upload->data('file_name');
         $data['freelancer_id'] = $this->input->post('freelancer');
         $data['note'] = $this->input->post('note');
         $data['shared_by'] = $this->session->userdata('user_id');

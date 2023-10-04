@@ -39,10 +39,10 @@
                             <?php echo $code->note; ?>
                         </td>
                         <td>
-                            <a href ="<?php echo $code->filename; ?>" class="btn btn-primary" download>Downlaod</a>
-                            <button onclick="downloadfile('<?php echo $code->filename; ?>')">
+                            <a href ="<?php echo base_url()."uploads/".$code->filename; ?>" class="btn btn-primary" download>Downlaod</a>
+                            <!-- <button onclick="downloadfile('<?php echo $code->filename; ?>')">
                                 download
-                            </button>
+                            </button> -->
                             <p>
                             <?php echo $code->filename; ?>
                             </p>
@@ -56,8 +56,8 @@
 </div>
 
 <script>
-    function downloadfile(file){
-        alert();
-        window.open(file);
-    }
+    // function downloadfile(file){
+    //     alert(file);
+    //     window.open(file);
+    // }
 </script>
