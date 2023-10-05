@@ -37,4 +37,14 @@ class Skills extends CI_Controller {
             redirect('Admin');
         }
     }
+
+    public function delete_skill($id){
+        $this->Skill_model->deactivate_skill($id);
+        redirect('AdminController/skills');
+    }
+    public function enable_skill($id){
+        $this->Skill_model->activate_skill($id);
+        redirect('AdminController/skills');
+    }
+    
 }

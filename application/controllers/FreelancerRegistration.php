@@ -14,9 +14,11 @@ class FreelancerRegistration extends CI_Controller {
 
     public function index() {
         // Load the registration form view for freelancers
-        $this->load->view('header');
+        $this->load->view('site/header');
 
         $this->load->view('freelancer_registration_view');
+        $this->load->view('site/footer');
+
     }
 
     
@@ -249,4 +251,5 @@ class FreelancerRegistration extends CI_Controller {
         
         redirect('freelancer-collaboration');
     }
+    
 }

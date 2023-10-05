@@ -83,5 +83,27 @@ class Work_model extends CI_Model {
 
         return $query->result();
     }
-    
+
+    public function get_works(){
+        $this->db->select('w.*,c.first_name,c.email');
+        $this->db->from('works w');
+        $this->db->join('customers c', 'c.user_id = w.customer_id');
+
+        $query = $this->db->get();
+        return $query->result();
+
+    }
+
+    public function count_works(){
+        $table = "works";
+        $count = $this->db->count_all_results($table);
+        return $count;
+    }
+    public function total_sales(){
+        $table = "works";
+        $this->db->select_sum('budget');
+        $result = $this->db->get($table);
+        $sum = $result->row();
+        return $sum->budget;
+    }
 }

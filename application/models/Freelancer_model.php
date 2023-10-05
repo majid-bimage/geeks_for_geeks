@@ -87,7 +87,9 @@ class Freelancer_model extends CI_Model {
     }
 
     public function get_freelancer(){
-        $this->db->from('freelancers');
+        $this->db->from('freelancers f');
+        $this->db->join('users u', 'u.id = f.user_id');
+
         // $this->db->where('freelancer_id', $freelancer_id);
         $query = $this->db->get();
     
@@ -108,5 +110,10 @@ class Freelancer_model extends CI_Model {
         $query = $this->db->get();
     
         return $query->result();
+    }
+    public function count_freelancers(){
+        $table = "freelancers";
+        $count = $this->db->count_all_results($table);
+        return $count;
     }
 }

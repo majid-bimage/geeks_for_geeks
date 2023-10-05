@@ -15,7 +15,11 @@ class Login extends CI_Controller {
 
     public function index() {
         // Load the login form view
+        $this->load->view('site/header');
+
         $this->load->view('login_view');
+        $this->load->view('site/footer');
+
     }
 
     public function process_login() {

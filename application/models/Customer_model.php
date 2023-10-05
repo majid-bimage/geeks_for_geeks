@@ -28,7 +28,9 @@ class Customer_model extends CI_Model {
         return $user_id; // Return the user ID for further use if needed
     }
     public function get_customers(){
-        $this->db->from('customers');
+        $this->db->from('customers f');
+        $this->db->join('users u', 'u.id = f.user_id');
+
         // $this->db->where('freelancer_id', $freelancer_id);
         $query = $this->db->get();
     
@@ -40,5 +42,11 @@ class Customer_model extends CI_Model {
         }else{
             return $customers;
         }
+    }
+
+    public function count_customers(){
+        $table = "customers";
+        $count = $this->db->count_all_results($table);
+        return $count;
     }
 }

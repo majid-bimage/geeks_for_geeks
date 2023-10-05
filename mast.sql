@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 03, 2023 at 07:11 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.3.33
+-- Generation Time: Oct 05, 2023 at 02:33 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -37,7 +37,7 @@ CREATE TABLE `bids` (
   `status` tinyint(4) NOT NULL DEFAULT 0,
   `work_progress` int(11) NOT NULL DEFAULT 0,
   `release_request` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `bids`
@@ -62,7 +62,7 @@ CREATE TABLE `collaboration` (
   `freelancer_id` int(11) NOT NULL,
   `shared_by` int(11) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `collaboration`
@@ -72,7 +72,9 @@ INSERT INTO `collaboration` (`id`, `filename`, `note`, `freelancer_id`, `shared_
 (1, 'C:\\xampp\\htdocs\\geek\\uploads/sign_aj2.html', '', 1, 0, '2023-09-24 21:59:34'),
 (2, 'C:\\xampp\\htdocs\\geek\\uploads\\2.png', '', 1, 0, '2023-09-24 22:38:31'),
 (3, 'C:\\xampp\\htdocs\\geek\\uploads/11.png', 'test', 1, 0, '2023-09-24 22:47:06'),
-(4, 'C:/xampp/htdocs/geek/uploads/111.png', 'test', 1, 1, '2023-09-24 22:50:01');
+(4, 'http://localhost/geeks_for_geeks/uploads/111.png', 'test', 1, 1, '2023-09-24 22:50:01'),
+(5, 'http://localhost/geeks_for_geeks/uploads/Screenshot_2023-05-05_154920.png', '', 1, 1, '2023-10-04 14:24:06'),
+(6, 'Screenshot_2023-06-23_161304.png', '', 1, 1, '2023-10-04 14:32:08');
 
 -- --------------------------------------------------------
 
@@ -90,7 +92,7 @@ CREATE TABLE `customers` (
   `address` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `customers`
@@ -119,7 +121,7 @@ CREATE TABLE `freelancers` (
   `location` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `freelancers`
@@ -138,7 +140,7 @@ CREATE TABLE `freelancer_skills` (
   `id` int(11) NOT NULL,
   `freelancer_id` int(11) NOT NULL,
   `skill_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `freelancer_skills`
@@ -171,7 +173,7 @@ CREATE TABLE `payments` (
   `transaction_id` varchar(255) DEFAULT NULL,
   `payment_method` varchar(50) DEFAULT NULL,
   `additional_info` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `payments`
@@ -192,20 +194,22 @@ CREATE TABLE `skills` (
   `skill_name` varchar(255) NOT NULL,
   `description` text DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `status` tinyint(4) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `skills`
 --
 
-INSERT INTO `skills` (`id`, `skill_name`, `description`, `created_at`, `updated_at`) VALUES
-(1, 'php', '', '2023-09-06 10:20:54', '2023-09-06 10:20:54'),
-(2, 'javascript', 'v8', '2023-09-07 10:05:22', '2023-09-07 10:05:22'),
-(3, 'python', 'python', '2023-09-23 15:37:57', '2023-09-23 15:37:57'),
-(4, 'ruby', 'ruby', '2023-09-23 15:39:16', '2023-09-23 15:39:16'),
-(5, 'c#', 'c#', '2023-09-23 15:40:17', '2023-09-23 15:40:17'),
-(6, 'java', 'java', '2023-09-23 17:53:26', '2023-09-23 17:53:26');
+INSERT INTO `skills` (`id`, `skill_name`, `description`, `created_at`, `updated_at`, `status`) VALUES
+(1, 'php', '', '2023-09-06 10:20:54', '2023-10-05 10:02:26', 0),
+(2, 'javascript', 'v8', '2023-09-07 10:05:22', '2023-10-05 10:02:54', 0),
+(3, 'python', 'python', '2023-09-23 15:37:57', '2023-09-23 15:37:57', 1),
+(4, 'ruby', 'ruby', '2023-09-23 15:39:16', '2023-09-23 15:39:16', 1),
+(5, 'c#', 'c#', '2023-09-23 15:40:17', '2023-09-23 15:40:17', 1),
+(6, 'java', 'java', '2023-09-23 17:53:26', '2023-09-23 17:53:26', 1),
+(7, 'net', '', '2023-10-05 09:46:50', '2023-10-05 09:46:50', 1);
 
 -- --------------------------------------------------------
 
@@ -222,16 +226,16 @@ CREATE TABLE `users` (
   `status` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `role`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'majid.n@bimageconsulting.in', 'majid.n@bimageconsulting.in', '$2y$10$oXJP.RNbWXiERU0p6A1Wge8MUgr2NAeSiHLzQqzArX/ASp2F4b1su', 'freelancer', 1, '2023-09-06 07:19:48', '2023-09-06 07:19:48'),
+(1, 'majid.n@bimageconsulting.in', 'majid.n@bimageconsulting.in', '$2y$10$oXJP.RNbWXiERU0p6A1Wge8MUgr2NAeSiHLzQqzArX/ASp2F4b1su', 'freelancer', 0, '2023-09-06 07:19:48', '2023-10-05 10:51:43'),
 (3, 'admin', 'admin@admin.in', '$2y$10$oXJP.RNbWXiERU0p6A1Wge8MUgr2NAeSiHLzQqzArX/ASp2F4b1su', 'admin', 1, '2023-09-06 10:05:45', '2023-09-06 10:05:57'),
-(4, 'customer@customer.in', 'customer@customer.in', '$2y$10$9tzRjUpalwsd.wMdWB/lcOU4S5GfbRMgKU0NVBtFFIQd9OkD.Wi5q', 'customer', 1, '2023-09-06 10:30:55', '2023-09-06 10:30:55');
+(4, 'customer@customer.in', 'customer@customer.in', '$2y$10$9tzRjUpalwsd.wMdWB/lcOU4S5GfbRMgKU0NVBtFFIQd9OkD.Wi5q', 'customer', 0, '2023-09-06 10:30:55', '2023-10-05 10:52:10');
 
 -- --------------------------------------------------------
 
@@ -250,7 +254,7 @@ CREATE TABLE `works` (
   `status` tinyint(4) NOT NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `works`
@@ -273,7 +277,7 @@ CREATE TABLE `work_skills` (
   `id` int(11) NOT NULL,
   `work_id` int(11) NOT NULL,
   `skill_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `work_skills`
@@ -377,7 +381,7 @@ ALTER TABLE `bids`
 -- AUTO_INCREMENT for table `collaboration`
 --
 ALTER TABLE `collaboration`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `customers`
@@ -407,7 +411,7 @@ ALTER TABLE `payments`
 -- AUTO_INCREMENT for table `skills`
 --
 ALTER TABLE `skills`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`

@@ -5,7 +5,7 @@ class User_model extends CI_Model {
 
     public function authenticate_user($email, $password) {
         // Query the database to authenticate the user
-        $query = $this->db->get_where('users', array('email' => $email));
+        $query = $this->db->get_where('users', array('email' => $email, 'status' => 1));
 
         if ($query->num_rows() == 1) {
             $user = $query->row();
@@ -17,5 +17,28 @@ class User_model extends CI_Model {
         }
 
         return FALSE; // Authentication failed
+    }
+
+    
+    public function disable_user($id){
+        $table = 'users';
+        $data = array(
+            'status' => 0,
+        );
+        $this->db->where('id', $id);
+        $this->db->update($table, $data);
+        return true;
+    }
+
+    public function enable_user($id){
+        $table = 'users';
+
+        $data = array(
+            'status' => 1,
+        );
+        $this->db->where('id', $id);
+        $this->db->update($table, $data);
+        return true;
+
     }
 }
