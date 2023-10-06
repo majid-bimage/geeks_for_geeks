@@ -9,34 +9,23 @@ class CustomerRegistration extends CI_Controller {
         $this->load->model('Skill_model'); // Load the Skill_model
         $this->load->model('Work_model'); // Load the Work_model
         $this->load->model('Bid_model'); // Load the Bid_model
-
-        
-        
-
-        
         $this->load->helper('form');
     }
 
     public function index() {
         // Load the registration form view for customers
         $this->load->view('site/header');
-
-
         $this->load->view('customer_registration_view');
         $this->load->view('site/footer');
-
     }
 
-       
     // Define the callback function
     public function email_check($email)
     {
         // Load the database library if it's not autoloaded
         $this->load->database();
-
         // Query the 'freelancers' table to check for the email's uniqueness
         $query = $this->db->get_where('customers', ['email' => $email]);
-
         // If no rows are found, the email is unique
         if ($query->num_rows() === 0) {
             return true;
@@ -48,6 +37,16 @@ class CustomerRegistration extends CI_Controller {
     }
 
     public function customer_dashboard(){
+
+        // $data['freelancers'] = $this->Freelancer_model->count_freelancers();
+        $data['customers'] = $this->Customer_model->count_customers();
+        $data['works'] = $this->Work_model->count_works();
+        $data['total_sales'] = $this->Work_model->total_sales_by_customer($this->session->userdata('user_id'));
+        $data['completed_works'] = $this->Work_model->works_completed($this->session->userdata('user_id'));
+        $data['bids'] = $this->Work_model->bids_recieved($this->session->userdata('user_id'));
+
+
+
         $data['skills'] = $this->Skill_model->get_skills();
         $data['posted_works'] = $this->Work_model->get_works_by_customer($this->session->userdata('user_id'));
 
@@ -58,7 +57,7 @@ class CustomerRegistration extends CI_Controller {
  
         }
         $this->load->view('customer/customer_header');
-        $this->load->view('customer_dashboard_view',$data); // Load customer dashboard
+        $this->load->view('customer/customer_home',$data); // Load customer dashboard
         $this->load->view('customer/customer_footer');
 
     }
@@ -160,8 +159,11 @@ class CustomerRegistration extends CI_Controller {
         // Get the work details based on the provided $work_id
         $data['work_details'] = $this->Work_model->get_work_details($work_id); // Implement this method in your Work_model
         $data['bids_received'] = $this->Bid_model->get_bids_for_work($work_id);
-        $this->load->view('header');
-        $this->load->view('view_bids_by_work',$data);
+        // $this->load->view('view_bids_by_work',$data);
+
+        $this->load->view('customer/customer_header');
+        $this->load->view('customer/view_bids_by_work',$data); // Load customer dashboard
+        $this->load->view('customer/customer_footer');
 
     }
 

@@ -63,8 +63,10 @@ class Login extends CI_Controller {
                 }
             } else {
                 // Authentication failed, show an error message
-                $data['error_message'] = 'Invalid email or password';
-                $this->load->view('login_view', $data);
+                // $data['error_message'] = 'Invalid email or password';
+                // $this->load->view('login_view', $data);
+                redirect('login');
+
             }
         }
     }
