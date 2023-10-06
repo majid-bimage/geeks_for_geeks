@@ -150,4 +150,16 @@ class Bid_model extends CI_Model {
 
         return $query->row_array();
     }
+
+    public function freelancer_earnings($id){
+        $table = "bids";
+        $this->db->select_sum('bid_amount');
+        $this->db->where('bids.freelancer_id', $id);
+        $this->db->where('bids.release_request', 2);
+
+
+        $result = $this->db->get($table);
+        $sum = $result->row();
+        return $sum->bid_amount;
+    }
 }

@@ -98,7 +98,7 @@ class FreelancerRegistration extends CI_Controller {
         
         // Get completed works for the freelancer
         $data['completed_works'] = $this->Work_model->get_completed_works_by_freelancer($this->session->userdata('user_id'));
-
+        $data['earnings'] = $this->Bid_model->freelancer_earnings($this->session->userdata('user_id'));
 
         $str ="";
         $data['submitted_works'] = array();
@@ -107,11 +107,13 @@ class FreelancerRegistration extends CI_Controller {
             array_push($data['submitted_works'], $row['work_id']);
         }
         // $data['submitted_works'] = explode(',',$str);
-        print_r($data['submitted_works']);
+        // print_r($data['submitted_works']);
 
-        $this->load->view('freelancer_header');
+        $this->load->view('freelancer/freelancer_header');
        
-        $this->load->view('freelancer_dashboard_view', $data);
+        $this->load->view('freelancer/freelancer_home', $data);
+        $this->load->view('freelancer/freelancer_footer');
+
 
     }
 
@@ -122,14 +124,15 @@ class FreelancerRegistration extends CI_Controller {
             // Add a skill to the freelancer's profile
             $skill_id = $this->input->post('add_skill');
             $this->Freelancer_model->add_skill($freelancer_id, $skill_id);
-        } elseif ($this->input->post('add_skill')) {
+        } 
+        elseif ($this->input->post('remove_skill')) {
             // Remove a skill from the freelancer's profile
             $skill_id = $this->input->post('remove_skill');
             $this->Freelancer_model->remove_skill($freelancer_id, $skill_id);
         }
 
         // Redirect back to the skills management page
-        redirect('Freelancer');
+        redirect('FreelancerRegistration/skills');
     }
     public function submit_bid() {
         $freelancer_id = $this->session->userdata('user_id'); // Assuming you store freelancer's user_id in the session
@@ -151,7 +154,7 @@ class FreelancerRegistration extends CI_Controller {
             $this->Bid_model->insert_bid($freelancer_id, $work_id, $bid_amount, $proposal);
     
             // Redirect back to the freelancer dashboard or show a success message
-            redirect('Freelancer');
+            redirect('FreelancerRegistration/matching_works');
         }
     }
     
@@ -163,7 +166,8 @@ class FreelancerRegistration extends CI_Controller {
         if (!$existing_bid) {
             // The freelancer doesn't have an existing bid for this work, handle accordingly
             // You can redirect or display an error message
-            redirect('freelancer/dashboard');
+            redirect('FreelancerRegistration/matching_works');
+
         }
     
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -188,7 +192,8 @@ class FreelancerRegistration extends CI_Controller {
                 $this->Bid_model->update_bid($existing_bid['id'], $bid_amount, $proposal);
     
                 // Redirect to the freelancer dashboard or show a success message
-                redirect('Freelancer');
+                redirect('FreelancerRegistration/matching_works');
+
             }
         }
     }
@@ -206,7 +211,7 @@ class FreelancerRegistration extends CI_Controller {
 
     public function acceptedbids(){
         $data['accepted_bids'] = $this->Bid_model->get_accepted_bids($this->session->userdata('user_id'));
-        $this->load->view('freelancer_header');
+        $this->load->view('freelancer/freelancer_header');
         $this->load->view('freelancer/acceptedbids',$data);
         $this->load->view('freelancer/freelancer_footer');
 
@@ -226,7 +231,7 @@ class FreelancerRegistration extends CI_Controller {
         $data['shared_code'] =$this->Freelancer_model->get_shared_code($this->session->userdata('user_id'));
 
 
-        $this->load->view('freelancer_header');
+        $this->load->view('freelancer/freelancer_header');
         $this->load->view('freelancer/freelancer_collaboration',$data);
         $this->load->view('freelancer/freelancer_footer');
     }
@@ -251,5 +256,32 @@ class FreelancerRegistration extends CI_Controller {
         
         redirect('freelancer-collaboration');
     }
-    
+
+
+    public function matching_works(){
+        $data['matching_works'] = $this->Freelancer_model->get_matching_works($this->session->userdata('user_id'));
+        $data['submitted_bids'] = $this->Bid_model->get_submitted_bids($this->session->userdata('user_id'));
+        $data['submitted_works'] = array();
+        foreach ($data['submitted_bids'] as  $row){
+            // $str = $str.",".$row['work_id'];
+            array_push($data['submitted_works'], $row['work_id']);
+        }
+
+
+        $this->load->view('freelancer/freelancer_header');
+        $this->load->view('freelancer/freelancer_matching_works',$data);
+        $this->load->view('freelancer/freelancer_footer');
+    }
+    public function skills(){
+        $data['skills'] = $this->Skill_model->get_skills();
+
+        
+
+        // Retrieve skills associated with the freelancer from the Freelancer_model
+        $data['freelancer_skills'] = $this->Freelancer_model->get_freelancer_skills($this->session->userdata('user_id')); // Assuming you store freelancer's user_id in the session
+
+        $this->load->view('freelancer/freelancer_header');
+        $this->load->view('freelancer/freelancer_skills',$data);
+        $this->load->view('freelancer/freelancer_footer');
+    }
 }

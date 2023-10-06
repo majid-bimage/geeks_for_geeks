@@ -78,7 +78,7 @@ class Work_model extends CI_Model {
         $this->db->from('works w');
         $this->db->join('bids b', 'b.work_id = w.id');
         $this->db->where('b.freelancer_id', $freelancer_id);
-        $this->db->where('b.status', 1); // Assuming 'completed' is the status for completed works
+        $this->db->where('b.work_progress', 2); // Assuming 'completed' is the status for completed works
         $query = $this->db->get();
 
         return $query->result();
