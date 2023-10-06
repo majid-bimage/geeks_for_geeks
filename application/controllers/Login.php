@@ -29,7 +29,8 @@ class Login extends CI_Controller {
     
         if ($this->form_validation->run() == FALSE) {
             // If validation fails, reload the login form with errors
-            $this->load->view('login_view');
+            // $this->load->view('login_view');
+            redirect('login');
         } else {
             // If validation is successful, attempt to authenticate the user
             $email = $this->input->post('email');

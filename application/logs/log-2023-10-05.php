@@ -51,3 +51,48 @@ ERROR - 2023-10-05 14:16:55 --> Severity: Warning --> Attempt to read property "
 ERROR - 2023-10-05 14:16:55 --> Severity: error --> Exception: Object of class CI_DB_mysqli_result could not be converted to string C:\xampp\htdocs\geeks_for_geeks\application\views\admin\admin_home.php 64
 ERROR - 2023-10-05 14:17:33 --> Severity: error --> Exception: Object of class CI_DB_mysqli_result could not be converted to string C:\xampp\htdocs\geeks_for_geeks\application\views\admin\admin_home.php 64
 ERROR - 2023-10-05 14:17:51 --> Severity: error --> Exception: Object of class CI_DB_mysqli_result could not be converted to string C:\xampp\htdocs\geeks_for_geeks\application\views\admin\admin_home.php 64
+ERROR - 2023-10-05 16:41:29 --> Severity: Notice --> Undefined property: stdClass::$status C:\xampp\htdocs\geeks_for_geeks\application\views\admin\skills.php 56
+ERROR - 2023-10-05 16:41:29 --> Severity: Notice --> Undefined property: stdClass::$status C:\xampp\htdocs\geeks_for_geeks\application\views\admin\skills.php 56
+ERROR - 2023-10-05 16:41:29 --> Severity: Notice --> Undefined property: stdClass::$status C:\xampp\htdocs\geeks_for_geeks\application\views\admin\skills.php 56
+ERROR - 2023-10-05 16:41:29 --> Severity: Notice --> Undefined property: stdClass::$status C:\xampp\htdocs\geeks_for_geeks\application\views\admin\skills.php 56
+ERROR - 2023-10-05 16:41:29 --> Severity: Notice --> Undefined property: stdClass::$status C:\xampp\htdocs\geeks_for_geeks\application\views\admin\skills.php 56
+ERROR - 2023-10-05 16:41:29 --> Severity: Notice --> Undefined property: stdClass::$status C:\xampp\htdocs\geeks_for_geeks\application\views\admin\skills.php 56
+ERROR - 2023-10-05 17:22:51 --> 404 Page Not Found: CustomerRegistration/works
+ERROR - 2023-10-05 17:26:48 --> Severity: error --> Exception: Cannot use object of type stdClass as array C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 49
+ERROR - 2023-10-05 17:27:28 --> Severity: error --> Exception: Cannot use object of type stdClass as array C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:12 --> Severity: Notice --> Undefined variable: work C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:12 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:12 --> Severity: Notice --> Undefined index:  C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:12 --> Severity: Notice --> Undefined variable: work C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:12 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:12 --> Severity: Notice --> Undefined index:  C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:12 --> Severity: Notice --> Undefined variable: work C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:12 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:12 --> Severity: Notice --> Undefined index:  C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:12 --> Severity: Notice --> Undefined variable: work C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:12 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:12 --> Severity: Notice --> Undefined index:  C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:12 --> Severity: Notice --> Undefined variable: work C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:12 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:12 --> Severity: Notice --> Undefined index:  C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:12 --> Severity: Notice --> Undefined variable: work C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:12 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:12 --> Severity: Notice --> Undefined index:  C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:33 --> Severity: Notice --> Undefined variable: work C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:33 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:33 --> Severity: Notice --> Undefined index:  C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:33 --> Severity: Notice --> Undefined variable: work C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:33 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:33 --> Severity: Notice --> Undefined index:  C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:33 --> Severity: Notice --> Undefined variable: work C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:33 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:33 --> Severity: Notice --> Undefined index:  C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:33 --> Severity: Notice --> Undefined variable: work C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:33 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:33 --> Severity: Notice --> Undefined index:  C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:33 --> Severity: Notice --> Undefined variable: work C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:33 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:33 --> Severity: Notice --> Undefined index:  C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:33 --> Severity: Notice --> Undefined variable: work C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:33 --> Severity: Notice --> Trying to get property 'id' of non-object C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55
+ERROR - 2023-10-05 17:28:33 --> Severity: Notice --> Undefined index:  C:\xampp\htdocs\geeks_for_geeks\application\views\customer\works.php 55

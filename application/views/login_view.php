@@ -8,7 +8,7 @@
     <!-- Display custom error message using Bootstrap alert -->
     <?php if (isset($error_message)) echo '<div class="alert alert-danger">' . $error_message . '</div>'; ?>
 
-    <?php echo form_open('login/process_login'); ?>
+    <?php echo form_open('Login/process_login'); ?>
 
     <div class="mb-3">
         <label for="email" class="form-label">Email:</label>

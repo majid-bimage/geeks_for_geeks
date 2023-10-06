@@ -96,6 +96,31 @@ class CustomerRegistration extends CI_Controller {
             }
         }
     }
+
+    public function works(){
+        $data['skills'] = $this->Skill_model->get_skills();
+        $data['posted_works'] = $this->Work_model->get_works_by_customer($this->session->userdata('user_id'));
+
+        foreach($data['posted_works'] as $work){
+            $data['work_skills'][$work->id] = $this->Work_model->get_skills_by_work($work->id);
+            // Get bids received for the work
+            $data['bids_received'][$work->id] = $this->Bid_model->get_bids_for_work($work->id);
+ 
+        }
+        $this->load->view('customer/customer_header');
+        $this->load->view('customer/works',$data); // Load customer dashboard
+        $this->load->view('customer/customer_footer');
+
+    }
+    public function post_works(){
+        $data['skills'] = $this->Skill_model->get_skills();
+
+        $this->load->view('customer/customer_header');
+        $this->load->view('customer/post_works_form',$data); // Load customer dashboard
+        $this->load->view('customer/customer_footer');
+
+    }
+
     public function post_work() {
         // Form validation rules
         $this->form_validation->set_rules('work_title', 'Work Title', 'required');
