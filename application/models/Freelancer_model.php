@@ -116,4 +116,20 @@ class Freelancer_model extends CI_Model {
         $count = $this->db->count_all_results($table);
         return $count;
     }
+    public function get_user_data($id){
+        $this->db->select('*,u.email mmail');
+        $this->db->from('users u');
+        $this->db->join('freelancers f', 'f.user_id = u.id');
+        $this->db->where('u.id', $id);
+        $query = $this->db->get();
+    
+        return $query->row();
+    }
+
+    public function update_profile($data,$id){
+        $table = 'freelancers';
+        $this->db->where('user_id', $id);
+        $this->db->update($table, $data);
+        return true;
+    }
 }

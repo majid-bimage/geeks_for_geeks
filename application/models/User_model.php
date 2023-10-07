@@ -41,4 +41,25 @@ class User_model extends CI_Model {
         return true;
 
     }
+
+    public function check_email($email){
+        $this->db->where('email', $email);
+        $query = $this->db->get('users');
+
+        // Check if there is a row with the given email
+        return ($query->num_rows());
+    }
+
+    public function update_password($email,$password){
+       $pass = password_hash($password, PASSWORD_DEFAULT);
+
+       $table = 'users';
+
+       $data = array(
+           'password' => $pass,
+       );
+       $this->db->where('email', $email);
+       $this->db->update($table, $data);
+       return true;
+    }
 }

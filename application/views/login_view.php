@@ -27,8 +27,9 @@
         <strong>
             New here ?
         </strong>
-        <a href="<?php echo base_url('index.php/customer-registration'); ?>">Register as Customer</a>
-        <a href="<?php echo base_url('index.php/freelancer-registration'); ?>">Register as Developer</a>
+        <a href="<?php echo base_url('index.php/customer-registration'); ?>">Register as Customer</a><?php echo "&nbsp"; ?><?php echo "&nbsp"; ?><?php echo "&nbsp"; ?>
+        <a href="<?php echo base_url('index.php/freelancer-registration'); ?>">Register as Developer</a><?php echo "&nbsp"; ?><?php echo "&nbsp"; ?><?php echo "&nbsp"; ?>
+        <a href="<?php echo base_url('index.php/pre-forgot-password'); ?>">Forgot Password</a><?php echo "&nbsp"; ?><?php echo "&nbsp"; ?><?php echo "&nbsp"; ?>
 
     </div>
 </div>

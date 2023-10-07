@@ -284,4 +284,25 @@ class FreelancerRegistration extends CI_Controller {
         $this->load->view('freelancer/freelancer_skills',$data);
         $this->load->view('freelancer/freelancer_footer');
     }
+
+
+    public function profile(){
+        $data['profile'] = $this->Freelancer_model->get_user_data($this->session->userdata('user_id'));
+        $this->load->view('freelancer/freelancer_header');
+        $this->load->view('freelancer/freelancer_profile',$data);
+        $this->load->view('freelancer/freelancer_footer');
+    }
+
+    public function update_profile(){
+
+        $data = array(
+            'phone_number' => $this->input->post('phone'),
+            'bio' => $this->input->post('bio'),
+            'location' => $this->input->post('location'),
+
+            // Add more fields as needed
+        );
+        $this->Freelancer_model->update_profile($data,$this->session->userdata('user_id'));
+        redirect('FreelancerRegistration/profile');
+    }
 }

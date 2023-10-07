@@ -16,12 +16,66 @@ class Login extends CI_Controller {
     public function index() {
         // Load the login form view
         $this->load->view('site/header');
-
         $this->load->view('login_view');
         $this->load->view('site/footer');
 
     }
 
+
+    public function pre_forgot_password(){
+        $data['email'] = null;
+
+        $this->load->view('site/header');
+        $this->load->view('site/pre_forgot_password',$data);
+        $this->load->view('site/footer');
+    }
+    public function check_email(){
+        $email = $this->input->post('email');
+        $existence = $this->User_model->check_email($email);
+        if($existence){
+            $data['email'] = $email;
+            $this->load->view('site/header');
+            $this->load->view('site/pre_forgot_password',$data);
+            $this->load->view('site/footer');
+
+        }else{
+            redirect('pre_forgot_password');
+        }
+    }
+
+    public function reset_password(){
+        $password = $this->input->post('password');
+        $re_password = $this->input->post('reenter');
+        $email = $this->input->post('email');
+        $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
+        $this->form_validation->set_rules('reenter', 'Password', 'required|min_length[6]');
+
+
+
+        if ($this->form_validation->run() == FALSE) {
+
+          
+            $data['email'] = $email;
+            $data['error_message'] = "Password validation error";
+            $this->load->view('site/header');
+            $this->load->view('site/pre_forgot_password',$data);
+            $this->load->view('site/footer');
+        }else{
+            if($password == $re_password){
+                $status = $this->User_model->update_password($email,$password);
+                if($status){
+                    redirect('pre-forgot-password');
+                }
+                }else{
+                    $data['email'] = $email;
+                    $data['error_message'] = "Password mismatch";
+                    $this->load->view('site/header');
+                    $this->load->view('site/pre_forgot_password',$data);
+                    $this->load->view('site/footer');
+                }
+        }
+
+    }
     public function process_login() {
         // Form validation rules
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');

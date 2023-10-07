@@ -9,6 +9,8 @@ class CustomerRegistration extends CI_Controller {
         $this->load->model('Skill_model'); // Load the Skill_model
         $this->load->model('Work_model'); // Load the Work_model
         $this->load->model('Bid_model'); // Load the Bid_model
+        $this->load->model('Payment_model'); // Load the Bid_model
+
         $this->load->helper('form');
     }
 
@@ -188,4 +190,11 @@ class CustomerRegistration extends CI_Controller {
 
     }
         
+    public function payments(){
+        $data['payments'] = $this->Payment_model->get_payment_details($this->session->userdata('user_id'));
+        $this->load->view('customer/customer_header');
+        $this->load->view('customer/customer_payments',$data); // Load customer dashboard
+        $this->load->view('customer/customer_footer');
+
+    }
 }

@@ -81,4 +81,5 @@ class AdminController extends CI_Controller {
         $this->load->view('admin/list_works',$data);
         $this->load->view('admin/admin_footer');
     }
+
 }

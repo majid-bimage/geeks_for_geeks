@@ -11,4 +11,18 @@ class Payment_model extends CI_Model {
             return false; // Insertion failed
         }
     }
+
+    public function get_payment_details($id){
+
+        $this->db->select('p.*,u.email fmail,w.work_title');
+        $this->db->from('payments p');
+        $this->db->join('bids b', 'p.bid = b.id');
+        $this->db->join('works w', 'b.work_id = w.id');
+        $this->db->join('users u', 'u.id = b.freelancer_id');
+
+
+        $this->db->where('p.customer_id', $id);
+        $query = $this->db->get();
+        return $query->result();
+    }
 }

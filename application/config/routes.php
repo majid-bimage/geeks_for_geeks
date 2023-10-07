@@ -73,6 +73,7 @@ $route['customer-accepted-bids'] = 'CustomerRegistration/acceptedbids';
 $route['release-fund-requests'] = 'AdminController/releasefundrequests';
 $route['freelancer-collaboration'] = 'FreelancerRegistration/collaboration';
 
+$route['pre-forgot-password'] = 'Login/pre_forgot_password';
 
 
 

@@ -1,19 +1,5 @@
 
 
-        <!--
-=========================================================
-* Material Dashboard 2 - v3.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://www.creative-tim.com/license)
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -91,6 +77,16 @@
           </a>
         </li>
         
+        <li class="nav-item">
+          <a class="nav-link text-white " href="<?php echo base_url('index.php/FreelancerRegistration/profile'); ?>">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">people</i>
+            </div>
+            <span class="nav-link-text ms-1">Profile</span>
+          </a>
+        </li>
+        
+
         <li class="nav-item">
           <a class="nav-link text-white " href="<?php echo base_url()."index.php/logout"; ?>">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
