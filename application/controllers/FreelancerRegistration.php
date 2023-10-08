@@ -69,7 +69,13 @@ class FreelancerRegistration extends CI_Controller {
     
             if ($user_id) {
                 // Registration successful, you can redirect to a success page or do other actions
-                redirect('FreelancerRegistration');
+                // redirect('FreelancerRegistration');
+
+                
+             $data['success'] = "HI, ".$data['first_name']." Registration Successful, You can login now";   
+             $this->load->view('site/header');
+             $this->load->view('login_view',$data);
+             $this->load->view('site/footer');
             } else {
                 // Registration failed, handle the error
                 // You can redirect to an error page or show an error message

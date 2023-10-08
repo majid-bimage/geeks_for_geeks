@@ -74,9 +74,4 @@ $route['release-fund-requests'] = 'AdminController/releasefundrequests';
 $route['freelancer-collaboration'] = 'FreelancerRegistration/collaboration';
 
 $route['pre-forgot-password'] = 'Login/pre_forgot_password';
-
-
-
-
-
-
+$route['404_override'] = 'Errors/show_404';

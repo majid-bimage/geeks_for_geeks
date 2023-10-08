@@ -8,6 +8,9 @@
     <!-- Display custom error message using Bootstrap alert -->
     <?php if (isset($error_message)) echo '<div class="alert alert-danger">' . $error_message . '</div>'; ?>
 
+    <?php if (isset($success)) echo '<div class="alert alert-success">' . $success . '</div>'; ?>
+
+
     <?php echo form_open('Login/process_login'); ?>
 
     <div class="mb-3">
