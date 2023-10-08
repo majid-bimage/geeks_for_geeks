@@ -21,6 +21,8 @@ class Freelancer_model extends CI_Model {
             'user_id' => $user_id, // Assign the user ID obtained above
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
+            'email' => $data['email'], // add this line
+            
             // Add more freelancer-specific fields as needed
         );
         $this->db->insert('freelancers', $freelancer_data);
@@ -110,6 +112,21 @@ class Freelancer_model extends CI_Model {
         $query = $this->db->get();
     
         return $query->result();
+    }
+
+    public function get_shared_by_me($id){
+        $this->db->select('*,c.id cid');
+        $this->db->from('collaboration c');
+        $this->db->join('freelancers f', 'f.user_id = c.freelancer_id');
+        $this->db->where('c.shared_by', $id);
+        $query = $this->db->get();
+    
+        return $query->result();
+    }
+    public function delete_collab($id){
+        $this->db->where('id', $id); // Delete rows where the 'id' column equals 5
+        $this->db->delete('collaboration'); // Delete from the 'my_table' table
+        return true;
     }
     public function count_freelancers(){
         $table = "freelancers";

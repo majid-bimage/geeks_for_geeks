@@ -42,6 +42,21 @@ class User_model extends CI_Model {
 
     }
 
+    public function delete_user($id,$a){
+       
+        if($a){
+            $this->db->where('user_id', $id); // Delete rows where the 'id' column equals 5
+            $this->db->delete('freelancers'); // Delete from the 'my_table' table
+            
+        }else{
+            $this->db->where('user_id', $id); // Delete rows where the 'id' column equals 5
+            $this->db->delete('customers'); // Delete from the 'my_table' table
+
+        }
+        $this->db->where('id', $id); // Delete rows where the 'id' column equals 5
+        $this->db->delete('users'); // Delete from the 'my_table' table
+        return true;
+    }
     public function check_email($email){
         $this->db->where('email', $email);
         $query = $this->db->get('users');
@@ -52,9 +67,7 @@ class User_model extends CI_Model {
 
     public function update_password($email,$password){
        $pass = password_hash($password, PASSWORD_DEFAULT);
-
        $table = 'users';
-
        $data = array(
            'password' => $pass,
        );

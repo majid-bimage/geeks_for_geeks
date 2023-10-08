@@ -21,6 +21,7 @@ class Customer_model extends CI_Model {
             'user_id' => $user_id, // Assign the user ID obtained above
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
+            'email' => $data['email'],
             // Add more customer-specific fields as needed
         );
         $this->db->insert('customers', $customer_data);

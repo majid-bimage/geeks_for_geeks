@@ -8,13 +8,13 @@
             <div class="col-7 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 start-0 text-center justify-content-center flex-column">
               <!-- <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center" style="background-image: url('../assets/img/illustrations/illustration-signup.jpg'); background-size: cover;">
               </div> -->
-              <div class="container-fluid py-4">
+              <!-- <div class="container-fluid py-4"> -->
       <div class="row">
         <div class="col-12">
           <div class="card my-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                <h6 class="text-white text-capitalize ps-3">Skills</h6>
+                <h6 class="text-white text-capitalize ps-3">Shared Code With Me</h6>
               </div>
             </div>
             <div class="card-body px-0 pb-2">
@@ -28,7 +28,7 @@
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
 
                       <!-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Employed</th> -->
-                      <th class="text-secondary opacity-7"></th>
+                      <!-- <th class="text-secondary opacity-7"></th> -->
                     </tr>
                   </thead>
                   <tbody>
@@ -72,6 +72,77 @@
           </div>
         </div>
       </div>
+
+
+      <div class="row">
+        <div class="col-12">
+          <div class="card my-4">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+              <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                <h6 class="text-white text-capitalize ps-3">Shared Code By Me</h6>
+              </div>
+            </div>
+            <div class="card-body px-0 pb-2">
+              <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">SI No</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Name</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Note</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
+
+                      <!-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Employed</th> -->
+                      <th class="text-secondary opacity-7">Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <?php $ctr=0; foreach($shared_by_me as $code){ $ctr++; ?>
+
+
+                    <tr>
+                      <td  class="align-middle  text-center">
+                          
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm"><?php echo $ctr; ?></h6>
+                            <!-- <p class="text-xs text-secondary mb-0">john@creative-tim.com</p> -->
+                          </div>
+                      </td>
+                      <td  class="align-middle  text-center">
+                        <p class="text-xs font-weight-bold mb-0">                    <?php echo $code->first_name; ?> </p>
+                        <!-- <p class="text-xs text-secondary mb-0">Organization</p> -->
+                      </td>
+                      <td  class="align-middle  text-center">
+                      <p class="text-xs font-weight-bold mb-0">                    <?php echo $code->note; ?> </p>
+                      </td>
+
+                      <td class="align-middle  text-center">
+                            <a href ="<?php echo base_url()."uploads/".$code->filename; ?>" class="btn btn-primary" download>Downlaod</a>
+                            <!-- <button onclick="downloadfile('<?php echo $code->filename; ?>')">
+                                download
+                            </button> -->
+                            <p>
+                            </p>
+                      </td>
+                     
+                      <td class="align-middle  text-center">
+                        <a href ="<?php echo base_url()."index.php/FreelancerRegistration/delete_collab?id=".$code->cid; ?>" class="btn btn-primary">Delete</a>
+                      </td>
+                     
+                      
+                    </tr>
+                    <?php }
+                    ?>
+                
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
             </div>
             </div>
             <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
@@ -109,7 +180,7 @@
                         <select name="freelancer" id="freelancer" class="form-control mt-3">
                         <?php foreach($freelancers as $freelancer){
                             ?>
-                        <option value="<?php echo $freelancer['id']; ?>"><?php echo $freelancer['first_name']."-".$freelancer['email']; ?></option>
+                        <option value="<?php echo $freelancer['user_id']; ?>"><?php echo $freelancer['first_name']."-".$freelancer['email']; ?></option>
                         <?php
                         }
                         ?>

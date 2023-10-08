@@ -46,3 +46,7 @@ ERROR - 2023-10-07 09:53:10 --> Severity: Notice --> Undefined variable: email C
 ERROR - 2023-10-07 09:53:17 --> Severity: Notice --> Undefined variable: email C:\xampp\htdocs\geeks_for_geeks\application\views\site\pre_forgot_password.php 1
 ERROR - 2023-10-07 09:53:48 --> Severity: Notice --> Undefined variable: email C:\xampp\htdocs\geeks_for_geeks\application\views\site\pre_forgot_password.php 1
 ERROR - 2023-10-07 09:54:27 --> Severity: error --> Exception: Call to undefined method User_model::check_email() C:\xampp\htdocs\geeks_for_geeks\application\controllers\Login.php 34
+ERROR - 2023-10-07 19:18:08 --> Query error: Duplicate entry '' for key 'email' - Invalid query: INSERT INTO `customers` (`user_id`, `first_name`, `last_name`) VALUES (5, 'majid', 'n')
+ERROR - 2023-10-07 19:21:26 --> Query error: Duplicate entry 'majid@customer.in' for key 'email' - Invalid query: INSERT INTO `users` (`username`, `email`, `password`, `role`) VALUES ('majid@customer.in', 'majid@customer.in', '$2y$10$Wes5UHULM7kqmzfnLlaOKeHlc80jzCmAdFQfe4SAqbVZdwRUnDqIW', 'customer')
+ERROR - 2023-10-07 19:46:43 --> 404 Page Not Found: Index/index
+ERROR - 2023-10-07 19:48:08 --> Query error: Cannot add or update a child row: a foreign key constraint fails (`mast`.`freelancer_skills`, CONSTRAINT `freelancer_skills_ibfk_1` FOREIGN KEY (`freelancer_id`) REFERENCES `freelancers` (`id`)) - Invalid query: INSERT INTO `freelancer_skills` (`freelancer_id`, `skill_id`) VALUES ('9', '1')

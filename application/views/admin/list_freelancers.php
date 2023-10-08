@@ -19,7 +19,7 @@
 
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
                       <!-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Employed</th> -->
-                      <th class="text-secondary opacity-7"></th>
+                      <th class="text-center text-secondary opacity-7">Delete</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -51,7 +51,7 @@
                       <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold"><?php echo $row['created_at']; ?></span>
                       </td>
-                      <td class="align-middle">
+                      <td class="align-middle text-center">
                         <?php if($row['status']== 0 ){
                             ?>
                             <a href="<?php echo base_url()."index.php/AdminController/enable_user/".$row['user_id']."/1"; ?>" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
@@ -66,6 +66,9 @@
                             <?php
                         }
                         ?>
+                      </td>
+                      <td class="align-middle text-center">
+                        <a href="<?php echo base_url()."index.php/AdminController/delete_user/".$row['user_id']."/1"; ?>">Delete</a>
                       </td>
                     </tr>
                     <?php }

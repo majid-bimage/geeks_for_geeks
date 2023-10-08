@@ -75,6 +75,17 @@ class AdminController extends CI_Controller {
 
         }
     }
+
+
+    public function delete_user($id,$a){
+        $this->User_model->delete_user($id,$a);
+        if($a){
+            redirect('AdminController/list_freelancers');
+        }else{
+            redirect('AdminController/list_customers');
+
+        }
+    }
     public function list_works(){
         $data['works'] =$this->Work_model->get_works();
         $this->load->view('admin/admin_header');

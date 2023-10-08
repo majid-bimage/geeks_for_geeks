@@ -156,7 +156,7 @@
 
 
                       <!-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Employed</th> -->
-                      <th class="text-secondary opacity-7"></th>
+                      <!-- <th class="text-secondary opacity-7"></th> -->
                     </tr>
                   </thead>
                   <tbody>
@@ -211,7 +211,7 @@
                         <br>
                         <!-- <button class="btn" onClick="showBidForm(<?php echo $bid->id ?>)">Accept</button> -->
 
-                        <a href="<?php echo base_url()."accept_bid/".$bid->id; ?>">Accept</a>
+                        <!-- <a href="<?php echo base_url()."index.php/accept_bid/".$bid->id; ?>">Accept</a> -->
                         <button class="btn btn-secondary m-3" onClick="makeorderid(<?php echo $bid->id.",".$bid->bid_amount; ?>)">Pay</button>
                             <br>
                             <p id='order-response'></p>
@@ -246,6 +246,7 @@
     </div>
     
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         
 <script>
     function showBidForm(workId) {

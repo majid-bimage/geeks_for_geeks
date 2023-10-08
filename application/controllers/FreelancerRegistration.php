@@ -69,7 +69,7 @@ class FreelancerRegistration extends CI_Controller {
     
             if ($user_id) {
                 // Registration successful, you can redirect to a success page or do other actions
-                redirect('index');
+                redirect('FreelancerRegistration');
             } else {
                 // Registration failed, handle the error
                 // You can redirect to an error page or show an error message
@@ -229,11 +229,17 @@ class FreelancerRegistration extends CI_Controller {
     public function collaboration(){
         $data['freelancers'] =$this->Freelancer_model->get_freelancer();
         $data['shared_code'] =$this->Freelancer_model->get_shared_code($this->session->userdata('user_id'));
+        $data['shared_by_me'] =$this->Freelancer_model->get_shared_by_me($this->session->userdata('user_id'));
 
 
         $this->load->view('freelancer/freelancer_header');
         $this->load->view('freelancer/freelancer_collaboration',$data);
         $this->load->view('freelancer/freelancer_footer');
+    }
+    public function delete_collab(){
+        $id = $this->input->get('id');
+        $this->Freelancer_model->delete_collab($id);
+        redirect('FreelancerRegistration/collaboration');
     }
     public function uploadcode(){
         $this->load->library('upload');
