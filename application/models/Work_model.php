@@ -85,7 +85,7 @@ class Work_model extends CI_Model {
     }
 
     public function get_works(){
-        $this->db->select('w.*,c.first_name,c.email');
+        $this->db->select('w.*,c.first_name,c.email,w.id as workid');
         $this->db->from('works w');
         $this->db->join('customers c', 'c.user_id = w.customer_id');
 
@@ -134,5 +134,14 @@ class Work_model extends CI_Model {
         $count = count($query->result());
         return $count;
 
+    }
+
+    public function delete_work($id){
+        $this->db->where('id', $id); // Delete rows where the 'id' column equals 5
+        $this->db->delete('works'); // Delete from the 'my_table' table
+    }
+    public function delete_work_skills($id){
+        $this->db->where('work_id', $id); // Delete rows where the 'id' column equals 5
+        $this->db->delete('work_skills'); // Delete from the 'my_table' table
     }
 }

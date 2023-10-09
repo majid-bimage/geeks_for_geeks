@@ -4,7 +4,7 @@
           <div class="card my-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                <h6 class="text-white text-capitalize ps-3">Freelancers</h6>
+                <h6 class="text-white text-capitalize ps-3">Works</h6>
               </div>
             </div>
             <div class="card-body px-0 pb-2">
@@ -20,7 +20,7 @@
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">E-mail</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">creation Time</th>
 
-                      <!-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th> -->
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
                       <!-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Employed</th> -->
                       <!-- <th class="text-secondary opacity-7"></th> -->
                     </tr>
@@ -61,6 +61,11 @@
                       </td>
                       <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold"><?php echo $row->created_at; ?></span>
+                      </td>
+
+                      <td class="align-middle text-center">
+                        <a href="<?php echo base_url()."index.php/AdminController/delete_work/".$row->workid; ?>">Delete</a>
+
                       </td>
                       
                     </tr>

@@ -137,6 +137,25 @@ class Bid_model extends CI_Model {
         return true;
     
     }
+
+    public function get_released_fund_details(){
+        $this->db->select('*,b.status as bidstatus,b.id as bidid,f.first_name as freelancer, c.first_name as customername');
+        $this->db->from('bids b');
+        $this->db->join('freelancers f', 'f.user_id = b.freelancer_id');
+
+
+        $this->db->join('works w', 'w.id = b.work_id');
+        $this->db->join('customers c', 'c.user_id = w.customer_id');
+
+
+            $this->db->where('b.release_request', 2);
+
+        
+        $query = $this->db->get();
+
+        return $query->result_array();
+    
+    }
     public function get_bid_by_freelancer_work($freelancer_id,$work_id){
         $this->db->select('*');
         $this->db->from('bids');
@@ -161,5 +180,10 @@ class Bid_model extends CI_Model {
         $result = $this->db->get($table);
         $sum = $result->row();
         return $sum->bid_amount;
+    }
+
+    public function delete_work($id){
+        $this->db->where('work_id', $id); // Delete rows where the 'id' column equals 5
+        $this->db->delete('bids'); // Delete from the 'my_table' table
     }
 }

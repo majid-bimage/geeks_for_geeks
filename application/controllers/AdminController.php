@@ -37,6 +37,13 @@ class AdminController extends CI_Controller {
         $this->load->view('admin/admin_footer');
     }
 
+    public function releasedfunds(){
+        $data['requests'] =$this->Bid_model->get_released_fund_details();
+        $this->load->view('admin/admin_header');
+        $this->load->view('admin/releasedfunds',$data); // Load customer dashboard
+        $this->load->view('admin/admin_footer');
+    }
+
     public function releasefund($bidid){
         $this->Bid_model->releasefundbybid($bidid);
         redirect('AdminController/releasefundrequests');
@@ -91,6 +98,13 @@ class AdminController extends CI_Controller {
         $this->load->view('admin/admin_header');
         $this->load->view('admin/list_works',$data);
         $this->load->view('admin/admin_footer');
+    }
+
+    public function delete_work($id){
+        $this->Bid_model->delete_work($id);
+        $this->Work_model->delete_work_skills($id);
+        $this->Work_model->delete_work($id);
+        redirect('AdminController/list_works');
     }
 
 }
