@@ -12,9 +12,12 @@
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">SI No</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Name</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">SI No</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Name</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">E-mail</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Phone Number</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Aadhar number</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Aadhar</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">creation Time</th>
 
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
@@ -47,6 +50,18 @@
                       </td>
                       <td class="align-middle text-center text-sm">
                       <p class="text-xs font-weight-bold mb-0">  <?php echo $row['email']; ?> </p>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                      <p class="text-xs font-weight-bold mb-0">  <?php echo $row['phone_number']; ?> </p>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                      <p class="text-xs font-weight-bold mb-0">  <?php echo $row['aadhar_number']; ?> </p>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <img src="<?php echo base_url().'uploads/'.$row['aadhar_file']; ?>" alt="aadhar_img" style="height:75px;">
+                        <br>
+                        <a href="<?php echo base_url().'uploads/'.$row['aadhar_file']; ?>" download>Download</a>
+
                       </td>
                       <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold"><?php echo $row['created_at']; ?></span>

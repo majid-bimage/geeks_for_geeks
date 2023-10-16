@@ -69,17 +69,35 @@
                                     if($bid['release_request'] < 1){
                                         ?>
                                         <a class="btn btn-success" href="<?php echo base_url('index.php/CustomerRegistration/releasefund/'.$bid['bidid']); ?>">Release Funds</a>
+                                        <br>
+                                        <a class="btn btn-danger" href="<?php echo base_url('index.php/CustomerRegistration/refundrequest/'.$bid['bidid']); ?>">ReFund Request</a>
+
                                         <?php
                                     }elseif($bid['release_request'] == 1){?>
 
-                                        <button class="btn btn-warning">request raised</button>
+                                        <button class="btn btn-warning">request raised for paying developer</button>
                                             <?php
-                                    }else{
+                                    }elseif($bid['release_request'] == 2){?>
+
+                                      <button class="btn btn-warning">Payment Processed to developer</button>
+                                          <?php
+                                  }elseif($bid['release_request'] == 3){
                                         ?>
-                                        <button class="btn btn-success">request raised</button>
+                                        <button class="btn btn-success">Request raised for refund</button>
 
                                         <?php
                                     }
+                                    elseif($bid['release_request'] == 4){
+                                      ?>
+                                      <button class="btn btn-success">Refund Processed</button>
+
+                                      <?php
+                                  }elseif($bid['release_request'] == 5){
+                                    ?>
+                                    <button class="btn btn-success">Refund Rejected</button>
+
+                                    <?php
+                                }
                                    
                                     break;
                                 default:

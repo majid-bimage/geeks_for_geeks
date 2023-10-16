@@ -49,6 +49,9 @@ class FreelancerRegistration extends CI_Controller {
         $this->form_validation->set_rules('last_name', 'Last Name', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email|callback_email_check');
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
+        $this->form_validation->set_rules('aadhar_number', 'Aadhar Number', 'required|min_length[12]');
+        $this->form_validation->set_rules('phonenumber', 'phone Number', 'required|min_length[10]');
+        
         // Add more validation rules as needed
     
 
@@ -56,12 +59,23 @@ class FreelancerRegistration extends CI_Controller {
             // If validation fails, reload the registration form with errors
             $this->load->view('freelancer_registration_view');
         } else {
+            $this->load->library('upload');
+            $config = array();
+            $config['upload_path'] =  realpath(APPPATH . '../uploads');
+            $config['allowed_types'] = 'html|jpeg|png';
+            $config['max_size']      = '200000';
+            $this->upload->initialize($config);
+            $this->upload->do_upload('aadhar_file');
+            $aadhar_file = $this->upload->data('file_name');
             // If validation is successful, insert the freelancer data into the "users" and "freelancers" tables
             $data = array(
                 'first_name' => $this->input->post('first_name'),
                 'last_name' => $this->input->post('last_name'),
                 'email' => $this->input->post('email'),
                 'password' => $this->input->post('password'),
+                'aadhar_file' => $aadhar_file,
+                'aadhar_number' => $this->input->post('aadhar_number'),
+                'phone_number' => $this->input->post('phonenumber')
                 // Add more fields as needed
             );
     

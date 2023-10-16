@@ -8,7 +8,7 @@
             </tr>
         </thead>
         <tbody>
-            <?php
+        <?php
             $ctr=0;
             foreach($requests as $row){
                 $ctr++;
@@ -41,7 +41,7 @@
           <div class="card my-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                <h6 class="text-white text-capitalize ps-3">Fund Release Requests</h6>
+                <h6 class="text-white text-capitalize ps-3">Re-Fund Requests</h6>
               </div>
             </div>
             <div class="card-body px-0 pb-2">
@@ -80,13 +80,14 @@
                         <!-- <p class="text-xs text-secondary mb-0">Organization</p> -->
                       </td>
                       <td class="align-middle text-center text-sm">
-                      <a class="btn" href="<?php echo base_url('index.php/AdminController/releasefund/'.$row['bidid']); ?>">
+                      <a class="btn" href="<?php echo base_url('index.php/AdminController/refund/'.$row['bidid']); ?>">
 
                         <span class="badge badge-sm bg-gradient-success">
-                            Release
+                            Process Refund
                         </span>
                         </a>
                       </td>
+                     
                      
                     </tr>
                     <?php }

@@ -22,7 +22,9 @@ class Freelancer_model extends CI_Model {
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'email' => $data['email'], // add this line
-            
+            'aadhar_file' => $data['aadhar_file'],
+            'aadhar_number' => $data['aadhar_number'],
+            'phone_number' => $data['phone_number'],
             // Add more freelancer-specific fields as needed
         );
         $this->db->insert('freelancers', $freelancer_data);

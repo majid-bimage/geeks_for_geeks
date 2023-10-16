@@ -207,7 +207,7 @@
                         ?>
                       </td>
                       <td  class="align-middle  text-center">
-                      <?php if($bid->status == 0){ ?>
+                      <?php if($bid->status == 0 ){ ?>
                         <br>
                         <!-- <button class="btn" onClick="showBidForm(<?php echo $bid->id ?>)">Accept</button> -->
 
@@ -217,10 +217,21 @@
                             <p id='order-response'></p>
                         <br>
                         <button class="btn" onClick="showBidForm(<?php echo $bid->id ?>)">Reject</button>
-                        <form id="<?php echo "bidForm_".$bid->id ?>" action="" style="display:none">
-                            <input type="text">
+                        <form id="<?php echo "bidForm_".$bid->id ?>" action="<?php echo base_url().'index.php/CustomerRegistration/reject_bid'; ?>" method="post" style="display:none">
+                          <input type="hidden" name="bid_id" value="<?= $bid->id; ?>">  
+                          <div class="mt-3 border">
+
+
+                            <input type="text" name="reason" class="form-control" placeholder="Reason for rejection">
+
+                          </div>
+                          <div class="mt-3">
+
+                            <input type="submit" value="Reject" class="btn btn-danger">
+
+                          </div>
                         </form>
-                        <?php }else{
+                        <?php }elseif($bid->status == 1){
                             echo "Payment Done";
                         } ?>
                       </td>

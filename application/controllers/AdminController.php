@@ -37,16 +37,34 @@ class AdminController extends CI_Controller {
         $this->load->view('admin/admin_footer');
     }
 
+    public function refundrequests(){
+        $data['requests'] =$this->Bid_model->get_refund_requests();
+        $this->load->view('admin/admin_header');
+        $this->load->view('admin/refundrequests',$data); // Load customer dashboard
+        $this->load->view('admin/admin_footer');
+    }
+
     public function releasedfunds(){
         $data['requests'] =$this->Bid_model->get_released_fund_details();
         $this->load->view('admin/admin_header');
         $this->load->view('admin/releasedfunds',$data); // Load customer dashboard
         $this->load->view('admin/admin_footer');
     }
+    public function refunddetails(){
+        $data['requests'] =$this->Bid_model->get_refund_details();
+        $this->load->view('admin/admin_header');
+        $this->load->view('admin/refunddetails',$data); // Load customer dashboard
+        $this->load->view('admin/admin_footer');
+    }
 
     public function releasefund($bidid){
         $this->Bid_model->releasefundbybid($bidid);
-        redirect('AdminController/releasefundrequests');
+        redirect('AdminController/releasedfunds');
+    }
+
+    public function refund($bidid){
+        $this->Bid_model->refundbybid($bidid);
+        redirect('AdminController/refunddetails');
     }
 
     public function list_freelancers(){

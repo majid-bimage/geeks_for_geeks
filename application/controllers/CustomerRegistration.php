@@ -70,18 +70,43 @@ class CustomerRegistration extends CI_Controller {
         $this->form_validation->set_rules('last_name', 'Last Name', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email|callback_email_check');
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
+        $this->form_validation->set_rules('aadhar_number', 'Aadhar Number', 'required|min_length[12]');
+        $this->form_validation->set_rules('phonenumber', 'phone Number', 'required|min_length[10]');
+        $this->form_validation->set_rules('pan', 'PAN Number', 'required|min_length[10]');
+        
+
+
         // Add more validation rules as needed
 
         if ($this->form_validation->run() == FALSE) {
             // If validation fails, reload the registration form with errors
             $this->load->view('customer_registration_view');
         } else {
+            $this->load->library('upload');
+            $config = array();
+            $config['upload_path'] =  realpath(APPPATH . '../uploads');
+            $config['allowed_types'] = 'html|jpeg|png';
+            $config['max_size']      = '200000';
+            $this->upload->initialize($config);
+            $this->upload->do_upload('aadhar_file');
+            $aadhar_file = $this->upload->data('file_name');
+            $this->upload->do_upload('pan_file');
+
+            $pan_file = $this->upload->data('file_name');
+
             // If validation is successful, insert the customer data into the "users" and "customers" tables
             $data = array(
                 'first_name' => $this->input->post('first_name'),
                 'last_name' => $this->input->post('last_name'),
                 'email' => $this->input->post('email'),
                 'password' => $this->input->post('password'),
+                'aadhar_file' => $aadhar_file,
+                'pan_file' => $pan_file,
+                'aadhar_number' => $this->input->post('aadhar_number'),
+                'pan_number' => $this->input->post('pan'),
+                'phone_number' => $this->input->post('phonenumber')
+
+
                 // Add more fields as needed
             );
 
@@ -186,13 +211,30 @@ class CustomerRegistration extends CI_Controller {
         $this->load->view('customer/customer_header');
         $this->load->view('customer/customer_acceptedbids',$data); // Load customer dashboard
         $this->load->view('customer/customer_footer');
+        
+    }
+
+    public function reject_bid(){
+        $data['bid_id'] =$this->input->post('bid_id');
+        $data['reason'] =$this->input->post('reason');
+        $this->Bid_model->reject_bid($data);
+
+        // Redirect back to the work details page or any other relevant page
+        redirect('customer');
 
     }
+
     public function releasefund($bidid){
         $this->Bid_model->releasefund($bidid);
         redirect('CustomerRegistration/acceptedbids');
 
     }
+    public function refundrequest($bidid){
+        $this->Bid_model->refundrequest($bidid);
+        redirect('CustomerRegistration/acceptedbids');
+
+    }
+    
         
     public function payments(){
         $data['payments'] = $this->Payment_model->get_payment_details($this->session->userdata('user_id'));

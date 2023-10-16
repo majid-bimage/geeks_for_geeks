@@ -4,7 +4,7 @@
 
     <?php echo validation_errors('<div class="alert alert-danger">', '</div>'); ?>
 
-    <?php echo form_open('CustomerRegistration/register'); ?>
+    <form action="<?php echo base_url('index.php/CustomerRegistration/register'); ?>" method="post" enctype="multipart/form-data">
 
     <div class="mb-3">
         <label for="first_name" class="form-label">First Name:</label>
@@ -22,8 +22,33 @@
     </div>
 
     <div class="mb-3">
+        <label for="phonenumber" class="form-label">Phone Number:</label>
+        <input type="text" class="form-control" name="phonenumber" required>
+    </div>
+
+    <div class="mb-3">
         <label for="password" class="form-label">Password:</label>
         <input type="password" class="form-control" name="password" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="aadhar_file" class="form-label">Aadhar Card :</label>
+        <input type="file" class="form-control" name="aadhar_file" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="aadhar_number" class="form-label">Aadhar Number :</label>
+        <input type="text" class="form-control" name="aadhar_number" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="pan_file" class="form-label">PAN Card :</label>
+        <input type="file" class="form-control" name="pan_file" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="pan" class="form-label">PAN Number :</label>
+        <input type="text" class="form-control" name="pan" required>
     </div>
 
     <!-- Add more form fields as needed -->

@@ -54,7 +54,7 @@
                 <div class="navbar-nav ms-auto p-4 p-lg-0">
                     <a href="<?php echo base_url(); ?>" class="nav-item nav-link active">Home</a>
                     <a href="index.php/about.html" class="nav-item nav-link">About</a>
-                    <a href="#" class="nav-item nav-link">Coders</a>
+                    <a href="#job-listing" class="nav-item nav-link">Coders</a>
                     
                     <a href="#footer_div" class="nav-item nav-link">Contact</a>
                 </div>

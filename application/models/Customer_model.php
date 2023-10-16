@@ -22,6 +22,12 @@ class Customer_model extends CI_Model {
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'email' => $data['email'],
+            'aadhar_file' => $data['aadhar_file'],
+            'aadhar_number' => $data['aadhar_number'],
+            'pan_file' => $data['pan_file'],
+            'pan_number' => $data['pan_number'],
+            'phone_number' => $data['phone_number'],
+
             // Add more customer-specific fields as needed
         );
         $this->db->insert('customers', $customer_data);

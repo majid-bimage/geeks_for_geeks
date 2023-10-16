@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 07, 2023 at 10:40 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.3.33
+-- Generation Time: Oct 16, 2023 at 01:44 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -35,19 +35,20 @@ CREATE TABLE `bids` (
   `proposal` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `status` tinyint(4) NOT NULL DEFAULT 0,
+  `reason_for_rejection` text DEFAULT NULL,
   `work_progress` int(11) NOT NULL DEFAULT 0,
   `release_request` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `bids`
 --
 
-INSERT INTO `bids` (`id`, `freelancer_id`, `work_id`, `bid_amount`, `proposal`, `created_at`, `status`, `work_progress`, `release_request`) VALUES
-(1, 1, 2, '1.00', 'a', '2023-09-08 05:19:05', 1, 2, 2),
-(2, 1, 3, '5.00', 'qwertyu uiop', '2023-09-22 11:29:18', 1, 2, 2),
-(3, 1, 5, '9.00', 'test proposal', '2023-09-23 17:51:06', 0, 0, 0),
-(4, 1, 6, '97.00', 'test proposal 2', '2023-09-23 17:54:39', 1, 1, 0);
+INSERT INTO `bids` (`id`, `freelancer_id`, `work_id`, `bid_amount`, `proposal`, `created_at`, `status`, `reason_for_rejection`, `work_progress`, `release_request`) VALUES
+(1, 1, 2, '1.00', 'a', '2023-09-08 05:19:05', 1, NULL, 2, 2),
+(2, 1, 3, '5.00', 'qwertyu uiop', '2023-09-22 11:29:18', 1, NULL, 2, 2),
+(3, 1, 5, '9.00', 'test proposal', '2023-09-23 17:51:06', 0, NULL, 0, 0),
+(4, 1, 6, '97.00', 'test proposal 2', '2023-09-23 17:54:39', 1, NULL, 2, 4);
 
 -- --------------------------------------------------------
 
@@ -62,7 +63,7 @@ CREATE TABLE `collaboration` (
   `freelancer_id` int(11) NOT NULL,
   `shared_by` int(11) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `collaboration`
@@ -90,16 +91,21 @@ CREATE TABLE `customers` (
   `email` varchar(100) NOT NULL,
   `phone_number` varchar(20) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
+  `aadhar_file` text DEFAULT NULL,
+  `aadhar_number` text NOT NULL,
+  `pan_file` text DEFAULT NULL,
+  `pan_number` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `customers`
 --
 
-INSERT INTO `customers` (`id`, `user_id`, `first_name`, `last_name`, `email`, `phone_number`, `address`, `created_at`, `updated_at`) VALUES
-(1, 4, 'customer', 'customer', '', NULL, NULL, '2023-09-06 10:30:55', '2023-09-06 10:30:55');
+INSERT INTO `customers` (`id`, `user_id`, `first_name`, `last_name`, `email`, `phone_number`, `address`, `aadhar_file`, `aadhar_number`, `pan_file`, `pan_number`, `created_at`, `updated_at`) VALUES
+(1, 4, 'customer', 'customer', '', NULL, NULL, NULL, '', NULL, '', '2023-09-06 10:30:55', '2023-09-06 10:30:55'),
+(7, 10, 'cus', 'N', 'cus.n@bb.in', '12345', NULL, 'Screenshot_2023-05-05_1549204.png', '123456789987', 'Screenshot_2023-06-23_1613042.png', '1234567899', '2023-10-16 09:25:27', '2023-10-16 11:41:34');
 
 -- --------------------------------------------------------
 
@@ -119,16 +125,19 @@ CREATE TABLE `freelancers` (
   `phone_number` varchar(20) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   `location` varchar(255) DEFAULT NULL,
+  `aadhar_file` text NOT NULL,
+  `aadhar_number` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `freelancers`
 --
 
-INSERT INTO `freelancers` (`id`, `user_id`, `first_name`, `last_name`, `profile_image`, `skills`, `bio`, `hourly_rate`, `phone_number`, `email`, `location`, `created_at`, `updated_at`) VALUES
-(1, 1, 'majid', 'N', NULL, NULL, 'sdfsdfkpsdkfpsdf sdfkspfk sdofsaof sdofsofoasf sfosaofasof', NULL, '8089332859', NULL, 'IND', '2023-09-06 07:19:48', '2023-10-07 06:52:21');
+INSERT INTO `freelancers` (`id`, `user_id`, `first_name`, `last_name`, `profile_image`, `skills`, `bio`, `hourly_rate`, `phone_number`, `email`, `location`, `aadhar_file`, `aadhar_number`, `created_at`, `updated_at`) VALUES
+(1, 1, 'majid', 'N', NULL, NULL, 'sdfsdfkpsdkfpsdf sdfkspfk sdofsaof sdofsofoasf sfosaofasof', NULL, '8089332859', NULL, 'IND', '', '', '2023-09-06 07:19:48', '2023-10-07 06:52:21'),
+(2, 11, 'sd', 'sd', NULL, NULL, NULL, NULL, '09745869570', 'asdf@sdf.gh', NULL, 'Screenshot_2023-08-02_151841.png', '123456789987', '2023-10-16 09:53:36', '2023-10-16 09:53:36');
 
 -- --------------------------------------------------------
 
@@ -140,7 +149,7 @@ CREATE TABLE `freelancer_skills` (
   `id` int(11) NOT NULL,
   `freelancer_id` int(11) NOT NULL,
   `skill_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `freelancer_skills`
@@ -173,7 +182,7 @@ CREATE TABLE `payments` (
   `transaction_id` varchar(255) DEFAULT NULL,
   `payment_method` varchar(50) DEFAULT NULL,
   `additional_info` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `payments`
@@ -196,7 +205,7 @@ CREATE TABLE `skills` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `status` tinyint(4) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `skills`
@@ -226,7 +235,7 @@ CREATE TABLE `users` (
   `status` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
@@ -235,7 +244,9 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `role`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'majid.n@bimageconsulting.in', 'majid.n@bimageconsulting.in', '$2y$10$oXJP.RNbWXiERU0p6A1Wge8MUgr2NAeSiHLzQqzArX/ASp2F4b1su', 'freelancer', 1, '2023-09-06 07:19:48', '2023-10-07 04:41:16'),
 (3, 'admin', 'admin@admin.in', '$2y$10$oXJP.RNbWXiERU0p6A1Wge8MUgr2NAeSiHLzQqzArX/ASp2F4b1su', 'admin', 1, '2023-09-06 10:05:45', '2023-09-06 10:05:57'),
-(4, 'customer@customer.in', 'customer@customer.in', '$2y$10$X9qM70LOkjXnqd6sNWjytutNFUBrT.f89AiTawVvwliKQbOiq5qpO', 'customer', 1, '2023-09-06 10:30:55', '2023-10-07 08:34:04');
+(4, 'customer@customer.in', 'customer@customer.in', '$2y$10$ejqW69IQlRWrhJDQ4ajjzO3.v8SOnfBOwOB8sHF1va4IbdzJBSpkC', 'customer', 1, '2023-09-06 10:30:55', '2023-10-16 04:45:34'),
+(10, 'cus.n@bb.in', 'cus.n@bb.in', '$2y$10$VWDvqBMbk5dXho1kFM7tgeT0BXe84qEQIoYmyEOdxZgWJqJPvrhc2', 'customer', 1, '2023-10-16 09:25:27', '2023-10-16 09:25:27'),
+(11, 'asdf@sdf.gh', 'asdf@sdf.gh', '$2y$10$Sv88vkwXBjJuN9/xGgr7Bu0Jm51QiiTqbVdQrNnCrvB83YhGVHyaW', 'freelancer', 1, '2023-10-16 09:53:36', '2023-10-16 09:53:36');
 
 -- --------------------------------------------------------
 
@@ -254,7 +265,7 @@ CREATE TABLE `works` (
   `status` tinyint(4) NOT NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `works`
@@ -278,7 +289,7 @@ CREATE TABLE `work_skills` (
   `id` int(11) NOT NULL,
   `work_id` int(11) NOT NULL,
   `skill_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `work_skills`
@@ -320,14 +331,16 @@ ALTER TABLE `collaboration`
 ALTER TABLE `customers`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `user_id` (`user_id`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `aadhar_number` (`aadhar_number`,`pan_number`) USING HASH;
 
 --
 -- Indexes for table `freelancers`
 --
 ALTER TABLE `freelancers`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `user_id` (`user_id`);
+  ADD UNIQUE KEY `user_id` (`user_id`),
+  ADD UNIQUE KEY `phone_number` (`phone_number`,`email`,`aadhar_number`) USING HASH;
 
 --
 -- Indexes for table `freelancer_skills`
@@ -392,13 +405,13 @@ ALTER TABLE `collaboration`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `freelancers`
 --
 ALTER TABLE `freelancers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `freelancer_skills`
@@ -422,7 +435,7 @@ ALTER TABLE `skills`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `works`
@@ -444,7 +457,7 @@ ALTER TABLE `work_skills`
 -- Constraints for table `bids`
 --
 ALTER TABLE `bids`
-  ADD CONSTRAINT `bids_ibfk_1` FOREIGN KEY (`freelancer_id`) REFERENCES `freelancers` (`id`),
+  ADD CONSTRAINT `bids_ibfk_1` FOREIGN KEY (`freelancer_id`) REFERENCES `freelancers` (`user_id`),
   ADD CONSTRAINT `bids_ibfk_2` FOREIGN KEY (`work_id`) REFERENCES `works` (`id`);
 
 --
@@ -463,7 +476,7 @@ ALTER TABLE `freelancers`
 -- Constraints for table `freelancer_skills`
 --
 ALTER TABLE `freelancer_skills`
-  ADD CONSTRAINT `freelancer_skills_ibfk_1` FOREIGN KEY (`freelancer_id`) REFERENCES `freelancers` (`id`),
+  ADD CONSTRAINT `freelancer_skills_ibfk_1` FOREIGN KEY (`freelancer_id`) REFERENCES `freelancers` (`user_id`),
   ADD CONSTRAINT `freelancer_skills_ibfk_2` FOREIGN KEY (`skill_id`) REFERENCES `skills` (`id`);
 
 --
