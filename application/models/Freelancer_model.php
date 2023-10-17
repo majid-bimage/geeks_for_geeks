@@ -38,6 +38,10 @@ class Freelancer_model extends CI_Model {
             'freelancer_id' => $freelancer_id,
             'skill_id' => $skill_id,
         );
+        $this->db->where('freelancer_id', $freelancer_id);
+        $this->db->where('skill_id', $skill_id);
+        $this->db->delete('freelancer_skills');
+        
         $this->db->insert('freelancer_skills', $data);
     }
 

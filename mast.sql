@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 16, 2023 at 01:44 PM
+-- Generation Time: Oct 17, 2023 at 06:23 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -92,9 +92,9 @@ CREATE TABLE `customers` (
   `phone_number` varchar(20) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `aadhar_file` text DEFAULT NULL,
-  `aadhar_number` text NOT NULL,
+  `aadhar_number` varchar(15) NOT NULL,
   `pan_file` text DEFAULT NULL,
-  `pan_number` text NOT NULL,
+  `pan_number` varchar(15) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -126,7 +126,7 @@ CREATE TABLE `freelancers` (
   `email` varchar(100) DEFAULT NULL,
   `location` varchar(255) DEFAULT NULL,
   `aadhar_file` text NOT NULL,
-  `aadhar_number` text NOT NULL,
+  `aadhar_number` varchar(15) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -156,11 +156,11 @@ CREATE TABLE `freelancer_skills` (
 --
 
 INSERT INTO `freelancer_skills` (`id`, `freelancer_id`, `skill_id`) VALUES
-(1, 1, 1),
 (2, 1, 2),
 (3, 1, 5),
 (4, 1, 4),
-(5, 1, 6);
+(5, 1, 6),
+(7, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -332,7 +332,7 @@ ALTER TABLE `customers`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `user_id` (`user_id`),
   ADD UNIQUE KEY `email` (`email`),
-  ADD UNIQUE KEY `aadhar_number` (`aadhar_number`,`pan_number`) USING HASH;
+  ADD UNIQUE KEY `aadhar_number` (`aadhar_number`,`pan_number`);
 
 --
 -- Indexes for table `freelancers`
@@ -340,7 +340,7 @@ ALTER TABLE `customers`
 ALTER TABLE `freelancers`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `user_id` (`user_id`),
-  ADD UNIQUE KEY `phone_number` (`phone_number`,`email`,`aadhar_number`) USING HASH;
+  ADD UNIQUE KEY `phone_number` (`phone_number`,`email`,`aadhar_number`);
 
 --
 -- Indexes for table `freelancer_skills`
@@ -417,7 +417,7 @@ ALTER TABLE `freelancers`
 -- AUTO_INCREMENT for table `freelancer_skills`
 --
 ALTER TABLE `freelancer_skills`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `payments`
