@@ -57,7 +57,9 @@ class FreelancerRegistration extends CI_Controller {
 
         if ($this->form_validation->run() == FALSE) {
             // If validation fails, reload the registration form with errors
+            $this->load->view('site/header');
             $this->load->view('freelancer_registration_view');
+            $this->load->view('site/footer');
         } else {
             $this->load->library('upload');
             $config = array();
