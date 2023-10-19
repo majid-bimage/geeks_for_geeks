@@ -41,7 +41,6 @@ class Freelancer_model extends CI_Model {
         $this->db->where('freelancer_id', $freelancer_id);
         $this->db->where('skill_id', $skill_id);
         $this->db->delete('freelancer_skills');
-        
         $this->db->insert('freelancer_skills', $data);
     }
 
@@ -59,7 +58,6 @@ class Freelancer_model extends CI_Model {
         $this->db->join('skills', 'skills.id = freelancer_skills.skill_id');
         $this->db->where('freelancer_skills.freelancer_id', $freelancer_id);
         $query = $this->db->get();
-
         return $query->result();
     }
 
